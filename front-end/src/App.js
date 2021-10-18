@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
+import "./css/App.css";
 import Home from "./containers/Home";
+import Groups from "./containers/Groups";
+import Login from "./containers/Login";
 
 function App() {
   return (
@@ -12,9 +14,12 @@ function App() {
             <Home />
           </Route>
 
+          <Route path="/groups">
+            <Groups />
+          </Route>
+
           <Route path="/">
-            <p>hello world from React app</p>
-            <a href="/home">to Home</a>
+            <Login />
           </Route>
         </Switch>
       </Router>
