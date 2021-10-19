@@ -1,6 +1,6 @@
 # Getting Started with WeListen Project
 
-WeListen is built using React library and Flask. It's a senior design project made by [Meihui Jin](), [Yanjun Meng](https://github.com/ymeng1834), [Chris Xu](https://github.com/chrisxhhh/), [Kewei Zhang](https://github.com/jeffzhkw/).
+WeListen is built using React library and Flask. It's a senior design project made by [Meihui Jin](https://github.com/MikoJin99), [Yanjun Meng](https://github.com/ymeng1834), [Chris Xu](https://github.com/chrisxhhh/), [Kewei Zhang](https://github.com/jeffzhkw/).
 
 # Quick Start
 

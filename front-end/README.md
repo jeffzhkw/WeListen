@@ -1,3 +1,10 @@
+# Useful Resoureces
+
+[Timed Comment](https://medium.com/swlh/adding-timed-comments-and-waveforms-to-spotify-75510451e61f)\
+[Web Audio API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API)\
+[Youtube Developers](https://developers.google.com/youtube)\
+https://www.audiomack.com/data-api/docs#general
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
