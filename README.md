@@ -78,7 +78,7 @@ Under project dictionary:
 
 # To Move React Built Files to Flask
 
-> Under front-end folder, in the terminal, type in sequence:
+> Under `front-end` folder, in the terminal, type in sequence:
 
 ### `npm run build`
 
