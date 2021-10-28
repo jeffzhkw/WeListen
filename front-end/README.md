@@ -1,9 +1,12 @@
-# Useful Resoureces
+# Useful Resources
 
 [Timed Comment](https://medium.com/swlh/adding-timed-comments-and-waveforms-to-spotify-75510451e61f)\
 [Web Audio API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API)\
-[Youtube Developers](https://developers.google.com/youtube)\
-https://www.audiomack.com/data-api/docs#general
+[Youtube Developers](https://developers.google.com/youtube)
+
+https://www.audiomack.com/data-api/docs#general\
+
+https://aws.amazon.com/getting-started/hands-on/build-modern-app-fargate-lambda-dynamodb-python/\
 
 # Getting Started with Create React App
 
