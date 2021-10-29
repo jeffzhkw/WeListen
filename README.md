@@ -94,9 +94,3 @@ Under project dictionary:
 ### `npm run toFlask`
 
 > Moves the built files from React folder(`/front-end/build`) to the Flask folder(`/static` and `/template`).
-
-temptemp
-
-temp temp from jeff
-
-comflict warning!!
