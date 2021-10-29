@@ -2,6 +2,12 @@
 
 WeListen is built using React library and Flask. It's a senior design project made by [Meihui Jin](https://github.com/MikoJin99), [Yanjun Meng](https://github.com/ymeng1834), [Chris Xu](https://github.com/chrisxhhh/), [Kewei Zhang](https://github.com/jeffzhkw/).
 
+# !----Attention for Git Version Control----!
+
+## Important: [Configure Git Upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork)
+
+Always do `git fetch upstream main` before staring any development process.
+
 # Quick Start
 
 ## Flask: First Time Setup
