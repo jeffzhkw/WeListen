@@ -18,5 +18,7 @@ app = Flask(__name__)
 def catch_all(path):
     return render_template("index.html")
 
+
+# starting point
 if __name__ == '__main__':
     app.run()
