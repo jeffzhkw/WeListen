@@ -1,11 +1,14 @@
 import React from "react";
-import NavBar from "../components/Navbar";
-import ControlBar from "../components/Controlbar";
+import NavBar from "../components/NavBar";
+import ControlBar from "../components/ControlBar";
 
 function Home() {
   return (
     <div className="homeWrapper">
-      <p>Hello world from the Home</p>
+      <NavBar />
+      <h1>Home</h1>
+
+      <ControlBar />
     </div>
   );
 }
