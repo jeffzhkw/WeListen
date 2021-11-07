@@ -11,6 +11,8 @@ function Song() {
       <form method="POST">
         <label htmlFor="songname">Songname</label>
         <input type="text" name="songname" id="songname" required></input>
+        <label htmlFor="author">Author</label>
+        <input name="author" required></input>
         <button type="submit">Search</button>
       </form>
       <ControlBar />

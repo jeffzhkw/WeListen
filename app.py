@@ -22,7 +22,7 @@ app = Flask(__name__)
 def catch_all(path):
     return render_template("index.html")
 
-@app.route('/search',methods = ['GET', 'POST'])
+@app.route('/song',methods = ['GET', 'POST'])
 def get_stream():
     # test url = "https://www.youtube.com/watch?v=fB8TyLTD7EE"
 
@@ -42,7 +42,7 @@ def get_stream():
     else:
         print("ERROR: fail to play song")
     # search.html only for debugging, not associate with react yet
-    return render_template("search.html")
+    return render_template("index.html")
 
 
 # starting point

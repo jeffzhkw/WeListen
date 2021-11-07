@@ -10,7 +10,7 @@ function NavBar() {
         <a href="\groups">Groups</a>
       </h2>
       <h2>
-        <a href="\Song">Song</a>
+        <a href="\song">Song</a>
       </h2>
       <h2>
         <a href="\start">Log out</a>
