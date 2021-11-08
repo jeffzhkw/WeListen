@@ -44,7 +44,7 @@ function Song() {
     <div className="songWrapper">
       <NavBar />
       <h1>Song</h1>
-      <form method="POST" action="/search">
+      <form action="/search">
         <label htmlFor="title">Song Name: </label>
         <input type="text" name="title" required></input>
 

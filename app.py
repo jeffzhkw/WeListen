@@ -24,10 +24,10 @@ def catch_all(path):
 
 
 
-@app.route('/search', methods = ['POST'])
+@app.route('/search', methods = ['GET'])
 def handle_stream_request():
-    title = request.form['title']
-    artist = request.form['artist']
+    title = request.args.get('title', '')
+    artist = request.args.get('artist', '')
     print("reached flask", title, artist)
 
     url = search_youtube_url(title, artist)
