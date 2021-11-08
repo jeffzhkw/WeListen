@@ -22,27 +22,45 @@ app = Flask(__name__)
 def catch_all(path):
     return render_template("index.html")
 
-@app.route('/song',methods = ['GET', 'POST'])
-def get_stream():
-    # test url = "https://www.youtube.com/watch?v=fB8TyLTD7EE"
-
-    if request.method == 'POST':
-        songname = request.form['songname']
-        authorname = request.form['author']
-        url = search_youtube_url(songname, authorname)
-        print(url)
-
-        video = pafy.new(url)
-        audio = video.getbestaudio()
-        audio_url = audio.url
-        #audio = video.getbest()
-        return audio_url
 
 
-    else:
-        print("ERROR: fail to play song")
-    # search.html only for debugging, not associate with react yet
-    return render_template("index.html")
+@app.route('/search', methods = ['POST'])
+def handle_stream_request():
+    title = request.form['title']
+    artist = request.form['artist']
+    print("reached flask", title, artist)
+
+    url = search_youtube_url(title, artist)
+    print(url)
+
+    video = pafy.new(url)
+    audio = video.getbestaudio()
+    audio_url = audio.url
+    
+    return audio_url
+
+
+# @app.route('/song',methods = ['GET', 'POST'])
+# def get_stream():
+#     # test url = "https://www.youtube.com/watch?v=fB8TyLTD7EE"
+#     # print("Request::", request.form)
+#     if request.method == 'POST':
+#         songname = request.form['title']
+#         authorname = request.form['artist']
+#         url = search_youtube_url(songname, authorname)
+#         print(url)
+
+#         video = pafy.new(url)
+#         audio = video.getbestaudio()
+#         audio_url = audio.url
+#         #audio = video.getbest()
+#         return audio_url
+
+
+#     else:
+#         print("ERROR: fail to play song")
+#     # search.html only for debugging, not associate with react yet
+#     return render_template("index.html")
 
 
 # starting point
