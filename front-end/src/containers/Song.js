@@ -36,19 +36,15 @@ function Song() {
         .get(URL)
         .then((response) => {
           console.log(response);
-          setAudioStream(response.audio_stream);
-          setResArtist(response.title);
-          setResTitle(response.artist);
+          setAudioStream(response.data.audio_stream);
+          setResArtist(response.data.title);
+          setResTitle(response.data.artist);
         })
         .catch((error) => {
           console.warn(error);
         });
     }
   }, [title, artist, URL]);
-
-  useEffect(() => {
-    setResArtist;
-  }, [audioStream]);
 
   const { audioData } = useMemo(() => {
     if (!audioStream) return { audioData: "" };

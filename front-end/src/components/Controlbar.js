@@ -4,7 +4,7 @@ function ControlBar({ audioStream, playingTitle, playingArtist }) {
   return (
     <div className="controlBarWrapper">
       <div className="musicPlayer">
-        <p>Playing</p>
+        <p>Playing: </p>
         <strong>{playingTitle}</strong>
         <strong>{playingArtist}</strong>
         <audio controls src={audioStream}>
