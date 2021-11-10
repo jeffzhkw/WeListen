@@ -1,18 +1,10 @@
-# from flask import Flask
-# from flask import render_template
-
-# app = Flask(__name__)
-
-
-# @app.route('/')
-# def hello():
-#     return render_template("index.html")
-
-
-from flask import Flask
+from flask import Flask, render_template, request, session, url_for, redirect
 from flask import request
 from flask.templating import render_template
 from flask import jsonify
+from API_KEYS import *
+import requests
+import jwt
 
 from search import *
 app = Flask(__name__)
@@ -31,32 +23,35 @@ def handle_stream_request():
     print("reached flask", title, artist)
 
     res = jsonify(formulate_response(title,artist))
-    
+
     return res
 
-# old post method for searching a youtube song
-# @app.route('/song',methods = ['GET', 'POST'])
-# def get_stream():
-#     # test url = "https://www.youtube.com/watch?v=fB8TyLTD7EE"
-#     # print("Request::", request.form)
-#     if request.method == 'POST':
-#         songname = request.form['title']
-#         authorname = request.form['artist']
-#         url = search_youtube_url(songname, authorname)
-#         print(url)
+@app.route('/signin')
+def signin():
+    cognito_signin_url = 'https://welisten.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=vp29p9t963qcb56f4kjieal1a&redirect_uri=http://localhost:5000/cognito_redirect'
+    return redirect(cognito_signin_url)
 
-#         video = pafy.new(url)
-#         audio = video.getbestaudio()
-#         audio_url = audio.url
-#         #audio = video.getbest()
-#         return audio_url
+@app.route('/cognito_redirect')
+def cognito_redirect():
+    cognito_code = request.args.get('code')
 
+    cognito_domain = 'https://welisten.auth.us-east-2.amazoncognito.com/'
 
-#     else:
-#         print("ERROR: fail to play song")
-#     # search.html only for debugging, not associate with react yet
-#     return render_template("index.html")
+    token_url = f'{cognito_domain}/oauth2/token'
+    auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
+    params = {
+        "grant_type": "authorization_code",
+        "client_id": client_id,
+        "code": cognito_code,
+        "redirect_uri": 'http://localhost:5000/cognito_redirect'
+    }
+    response = requests.post(token_url, auth=auth, data=params)
 
+    id_token = response.json()['id_token']
+    id_token_decoded = jwt.decode(id_token, options={"verify_signature": False})
+    user = id_token_decoded['cognito:username']
+
+    return render_template('index.html', username=user)
 
 # starting point
 if __name__ == '__main__':
