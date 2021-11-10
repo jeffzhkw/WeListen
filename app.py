@@ -26,7 +26,7 @@ def handle_stream_request():
 
     return res
 
-@app.route('/signin')
+@app.route('/login')
 def signin():
     cognito_signin_url = 'https://welisten.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=vp29p9t963qcb56f4kjieal1a&redirect_uri=http://localhost:5000/cognito_redirect'
     return redirect(cognito_signin_url)
@@ -52,7 +52,7 @@ def cognito_redirect():
     user = id_token_decoded['cognito:username']
     #TODO: user needed to display;
 
-    return render_template("index.html", username=user)
+    return redirect(f"/home/{user}")
 
 # starting point
 if __name__ == '__main__':

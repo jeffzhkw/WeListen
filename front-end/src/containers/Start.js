@@ -4,8 +4,14 @@ function Start() {
   return (
     <div>
       <p>Hello new user, please login or sign up</p>
-      <a href="/login">Continue</a>
-      <a href="/signin">AWS Cognito</a>
+
+      <p>
+        <a href="/login">Login using AWS Cognito</a>
+      </p>
+      <p>
+        <span>Assuming success: </span>
+        <a href="/home">To Home</a>
+      </p>
     </div>
   );
 }

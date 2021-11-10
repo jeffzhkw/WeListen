@@ -16,7 +16,7 @@ function App() {
             <Groups />
           </Route>
 
-          <Route path="/home">
+          <Route path="/home/:username">
             <Home />
           </Route>
 
