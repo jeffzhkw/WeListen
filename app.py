@@ -28,15 +28,11 @@ def handle_stream_request():
 
 @app.route('/signin')
 def signin():
-    cognito_signin_url = 'https://welisten.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=vp29p9t963qcb56f4kjieal1a&redirect_uri=http://localhost:5000/cognito_redirect'
     return redirect(cognito_signin_url)
 
 @app.route('/cognito_redirect')
 def cognito_redirect():
     cognito_code = request.args.get('code')
-
-    cognito_domain = 'https://welisten.auth.us-east-2.amazoncognito.com/'
-
     token_url = f'{cognito_domain}/oauth2/token'
     auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
     params = {
