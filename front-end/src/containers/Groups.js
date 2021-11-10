@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "../components/NavBar";
-import ControlBar from "../components/ControlBar";
+import NavBar from "../components/Navbar";
+import ControlBar from "../components/Controlbar";
 
 function Groups() {
   return (

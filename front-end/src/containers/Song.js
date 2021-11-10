@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
-import NavBar from "../components/NavBar";
-import ControlBar from "../components/ControlBar";
+import NavBar from "../components/Navbar";
+import ControlBar from "../components/Controlbar";
 import axios from "axios";
 
 function useQuery() {

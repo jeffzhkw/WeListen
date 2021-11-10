@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "../components/NavBar";
-import ControlBar from "../components/ControlBar";
+import NavBar from "../components/Navbar";
+import ControlBar from "../components/Controlbar";
 
 function Home() {
   let { username } = useParams();
