@@ -12,7 +12,7 @@
 from flask import Flask
 from flask import request
 from flask.templating import render_template
-import pafy
+from flask import jsonify
 
 from search import *
 app = Flask(__name__)
@@ -30,16 +30,11 @@ def handle_stream_request():
     artist = request.args.get('artist', '')
     print("reached flask", title, artist)
 
-    url = search_youtube_url(title, artist)
-    print(url)
-
-    video = pafy.new(url)
-    audio = video.getbestaudio()
-    audio_url = audio.url
+    res = jsonify(formulate_response(title,artist))
     
-    return audio_url
+    return res
 
-
+# old post method for searching a youtube song
 # @app.route('/song',methods = ['GET', 'POST'])
 # def get_stream():
 #     # test url = "https://www.youtube.com/watch?v=fB8TyLTD7EE"
