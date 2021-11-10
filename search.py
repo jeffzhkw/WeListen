@@ -1,5 +1,4 @@
 from googleapiclient.discovery import build
-from API_KEYS import *
 import pafy
 
 YOUTUBE_API_SERVICE_NAME = 'youtube'
@@ -37,5 +36,3 @@ def formulate_response(title, artist):
                      }
     print(response_dict)
     return response_dict
-
-
