@@ -40,7 +40,7 @@ function Song() {
           console.warn(error);
         });
     }
-  }, [title, artist]);
+  }, [title, artist, URL]);
 
   const { audioData } = useMemo(() => {
     if (!audioStream) return { audioData: "" };
