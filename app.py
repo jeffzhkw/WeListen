@@ -43,16 +43,17 @@ def cognito_redirect():
         "grant_type": "authorization_code",
         "client_id": client_id,
         "code": cognito_code,
-        "redirect_uri": 'http://localhost:5000/cognito_redirect'
+        "redirect_uri": 'http://127.0.0.1:5000/cognito_redirect'
     }
     response = requests.post(token_url, auth=auth, data=params)
 
     id_token = response.json()['id_token']
     id_token_decoded = jwt.decode(id_token, options={"verify_signature": False})
     user = id_token_decoded['cognito:username']
+    #TODO: user needed to display;
 
-    return render_template('index.html', username=user)
+    return render_template('index.html')
 
 # starting point
 if __name__ == '__main__':
-    app.run()
+    app.run(host='localhost', port=5000)
