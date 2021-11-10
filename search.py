@@ -32,7 +32,7 @@ def formulate_response(title, artist):
                      "artist":artist,
                      "youtubeURL": url,
                      "audio_stream": audio_url,
-                     "comment": [],
+                     "comment": [], #userid, comment_value, time stamp.
                      "liveComment": []
                      }
     print(response_dict)
