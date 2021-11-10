@@ -11,6 +11,8 @@ function useQuery() {
 function Song() {
   const [title, setTitle] = useState();
   const [artist, setArtist] = useState();
+  const [resTitle, setResTitle] = useState();
+  const [resArtist, setResArtist] = useState();
   const [audioStream, setAudioStream] = useState();
   const URL = `/search?title=${title}&artist=${artist}`;
 
@@ -34,7 +36,9 @@ function Song() {
         .get(URL)
         .then((response) => {
           console.log(response);
-          setAudioStream(response);
+          setAudioStream(response.audio_stream);
+          setResArtist(response.title);
+          setResTitle(response.artist);
         })
         .catch((error) => {
           console.warn(error);
@@ -42,11 +46,15 @@ function Song() {
     }
   }, [title, artist, URL]);
 
+  useEffect(() => {
+    setResArtist;
+  }, [audioStream]);
+
   const { audioData } = useMemo(() => {
     if (!audioStream) return { audioData: "" };
     else {
       return {
-        audioData: audioStream.data,
+        audioData: audioStream,
       };
     }
   }, [audioStream]);
@@ -66,7 +74,11 @@ function Song() {
         <button type="submit">Submit</button>
       </form>
 
-      <ControlBar audioStream={audioData} />
+      <ControlBar
+        audioStream={audioData}
+        playingTitle={resTitle}
+        playingArtist={resArtist}
+      />
     </div>
   );
 }

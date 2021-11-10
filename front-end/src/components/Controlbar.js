@@ -1,9 +1,12 @@
 import React from "react";
 
-function ControlBar({ audioStream }) {
+function ControlBar({ audioStream, playingTitle, playingArtist }) {
   return (
     <div className="controlBarWrapper">
       <div className="musicPlayer">
+        <p>Playing</p>
+        <strong>{playingTitle}</strong>
+        <strong>{playingArtist}</strong>
         <audio controls src={audioStream}>
           Your browser does not support the
           <code>audio</code> element.
