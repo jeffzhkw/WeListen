@@ -56,4 +56,4 @@ def cognito_redirect():
 
 # starting point
 if __name__ == '__main__':
-    app.run(host="localhost", post=8000, debug=True)
+    app.run()
