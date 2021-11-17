@@ -8,6 +8,8 @@ https://www.audiomack.com/data-api/docs#general\
 
 https://aws.amazon.com/getting-started/hands-on/build-modern-app-fargate-lambda-dynamodb-python/\
 
+https://getstream.io/chat/docs/react/?language=javascript\
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
