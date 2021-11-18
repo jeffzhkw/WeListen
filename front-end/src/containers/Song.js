@@ -1,20 +1,22 @@
 import { React, useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
-import NavBar from "../components/Navbar";
-import ControlBar from "../components/Controlbar";
+import SongThumbnail from "../components/Songthumbnail";
+
 import axios from "axios";
+import AudioPlayer from "../components/Audioplayer";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-function Song() {
+function Song({ handlePlay }) {
   const [title, setTitle] = useState();
   const [artist, setArtist] = useState();
   const [resTitle, setResTitle] = useState();
   const [resArtist, setResArtist] = useState();
   const [audioStream, setAudioStream] = useState();
-  const URL = `/search?title=${title}&artist=${artist}`;
+
+  const URL = `http://localhost:5000/search?title=${title}&artist=${artist}`;
 
   let query = useQuery();
 
@@ -30,8 +32,8 @@ function Song() {
   }, [query]);
 
   useEffect(() => {
-    console.log("Begin Axios");
     if (title && artist) {
+      console.log("Begin Axios");
       axios
         .get(URL)
         .then((response) => {
@@ -57,7 +59,6 @@ function Song() {
 
   return (
     <div className="songWrapper">
-      <NavBar />
       <form>
         <h1>Song</h1>
 
@@ -69,12 +70,19 @@ function Song() {
 
         <button type="submit">Submit</button>
       </form>
-
-      <ControlBar
-        audioStream={audioData}
-        playingTitle={resTitle}
-        playingArtist={resArtist}
-      />
+      <AudioPlayer audioStream={audioStream} />
+      {() => {
+        if (resTitle && resArtist && audioStream) {
+          return (
+            <SongThumbnail
+              title={resTitle}
+              artist={resArtist}
+              stream={audioStream}
+              handlePlay={handlePlay}
+            />
+          );
+        }
+      }}
     </div>
   );
 }

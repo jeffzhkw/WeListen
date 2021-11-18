@@ -1,22 +1,31 @@
 * {
   box-sizing: border-box;
 }
+/* .App {
+  display: flex;
+  flex-direction: column;
+} */
 
-.App {
+.Content {
   max-width: 1200px;
   margin: auto;
   border: 1px solid black;
 }
 
-.navBar {
+.headerWrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  border: 1px solid black;
+  justify-content: space-between;
 }
+
 .controlBarWrapper {
   display: flex;
   flex-direction: row;
   border: 1px solid black;
+  justify-self: flex-end;
+}
+.navBar {
 }
 
 /*mobile style*/
