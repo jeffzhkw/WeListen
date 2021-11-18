@@ -1,5 +1,6 @@
 from googleapiclient.discovery import build
 import pafy
+from API_KEYS import *
 
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
