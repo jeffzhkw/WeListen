@@ -5,7 +5,7 @@ function SongThumbnail({ title, artist, album, stream, handlePlay }) {
     <div className="square">
       <h3>{title}</h3>
       <h4>{artist}</h4>
-      <img src={album}></img>
+      <img src={album} alt="the album cover"></img>
       <p>
         <a href={"/song/" + title}>To Song detail page</a>
       </p>

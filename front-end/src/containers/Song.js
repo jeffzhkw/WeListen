@@ -3,7 +3,6 @@ import { useLocation } from "react-router";
 import SongThumbnail from "../components/Songthumbnail";
 
 import axios from "axios";
-import AudioPlayer from "../components/Audioplayer";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -73,7 +72,7 @@ function Song({ handlePlay }) {
       <SongThumbnail
         title={resTitle}
         artist={resArtist}
-        stream={audioStream}
+        stream={audioData}
         handlePlay={handlePlay}
       />
     </div>
