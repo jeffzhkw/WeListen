@@ -70,19 +70,12 @@ function Song({ handlePlay }) {
 
         <button type="submit">Submit</button>
       </form>
-      <AudioPlayer audioStream={audioStream} />
-      {() => {
-        if (resTitle && resArtist && audioStream) {
-          return (
-            <SongThumbnail
-              title={resTitle}
-              artist={resArtist}
-              stream={audioStream}
-              handlePlay={handlePlay}
-            />
-          );
-        }
-      }}
+      <SongThumbnail
+        title={resTitle}
+        artist={resArtist}
+        stream={audioStream}
+        handlePlay={handlePlay}
+      />
     </div>
   );
 }

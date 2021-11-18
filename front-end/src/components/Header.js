@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
   const username = "a-temp-user";
@@ -9,13 +10,16 @@ function Header() {
       </div>
       <div className="navBar">
         <h2>
-          <a href="\home">Home</a>
+          <Link to="home">Home</Link>
         </h2>
         <h2>
-          <a href="\groups">Groups</a>
+          <Link to="groups">Groups</Link>
         </h2>
         <h2>
-          <a href="\song">Song</a>
+          <Link to="song">Song</Link>
+        </h2>
+        <h2>
+          <Link to="activity">Activity</Link>
         </h2>
       </div>
       <div className="userDetail">
