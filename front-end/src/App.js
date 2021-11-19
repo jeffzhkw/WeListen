@@ -26,6 +26,7 @@ function App() {
     <div className="App">
       <Router>
         <Header />
+
         <div className="Content">
           <Switch>
             <Route path="/groups">
