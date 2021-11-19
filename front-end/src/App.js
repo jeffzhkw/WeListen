@@ -24,9 +24,9 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <div className="Content">
-        <Router>
-          <Header />
+      <Router>
+        <Header />
+        <div className="Content">
           <Switch>
             <Route path="/groups">
               <Groups />
@@ -46,21 +46,20 @@ function App() {
             <Route path="/activity">
               <Activity />
             </Route>
+            <Route path="/profile">
+              <Route path="/profile/:username" component={Profile} />
+            </Route>
             <Route path="/">
               <Start />
             </Route>
-
-            <Route path="/:username">
-              <Profile />
-            </Route>
           </Switch>
-          <ControlBar
-            currTitle={currTitle}
-            currArtist={currArtist}
-            currStream={currStream}
-          />
-        </Router>
-      </div>
+        </div>
+        <ControlBar
+          currTitle={currTitle}
+          currArtist={currArtist}
+          currStream={currStream}
+        />
+      </Router>
     </div>
   );
 }

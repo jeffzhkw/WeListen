@@ -10,21 +10,21 @@ function Header() {
       </div>
       <div className="navBar">
         <h2>
-          <Link to="home">Home</Link>
+          <Link to="/home">Home</Link>
         </h2>
         <h2>
-          <Link to="groups">Groups</Link>
+          <Link to="/groups">Groups</Link>
         </h2>
         <h2>
-          <Link to="song">Song</Link>
+          <Link to="/song">Song</Link>
         </h2>
         <h2>
-          <Link to="activity">Activity</Link>
+          <Link to="/activity">Activity</Link>
         </h2>
       </div>
       <div className="userDetail">
         <h2>
-          <a href={username}>{username}</a>
+          <Link to={"/profile/" + username}>{username}</Link>
         </h2>
         <h2>
           <a href="\start">Log out</a>

@@ -51,10 +51,11 @@ def cognito_redirect():
 
     id_token = response.json()['id_token']
     id_token_decoded = jwt.decode(id_token, options={"verify_signature": False})
+    print(id_token_decoded)
     user = id_token_decoded['cognito:username']
-    #TODO: user needed to display;
 
-    return redirect(f"/home/{user}")
+    
+    return redirect(f"/profile/{user}")
 
 # starting point
 if __name__ == '__main__':
