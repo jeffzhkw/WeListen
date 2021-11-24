@@ -1,79 +1,70 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { useLocation, Redirect } from "react-router-dom";
+
 import axios from "axios";
+import qs from "qs";
 
-function Login() {
-  //handle events
-  //https://reactjs.org/docs/handling-events.html
-  // const [username, setUsername] = useState();
-  // const [password, setPassword] = useState();
+const {
+  REACT_APP_CLIENT_ID,
+  REACT_APP_CLIENT_SECRET,
+  REACT_APP_COGNITO_DOMAIN,
+  REACT_APP_REDIRECT_URI,
+} = process.env;
 
-  const client_id = "hmahe8t4gg805bqsk90uvb58d";
-  const client_secret = "igi2a2hmk5nec5tgp62rv38onfb87nakn5qm9imh4c0vqjt3aa0";
+function Login({ handleUserInfo }) {
+  const [userToken, setUserToken] = useState();
 
-  const { code } = useParams();
-  const cognito_domain = "https://welisten.auth.us-east-1.amazoncognito.com";
-  const token_url = `${cognito_domain}/oauth2/token`;
+  const code = new URLSearchParams(useLocation().search).get("code");
+  const payload = useMemo(() => {
+    return {
+      grant_type: "authorization_code",
+      client_id: REACT_APP_CLIENT_ID,
+      code: code,
+      redirect_uri: REACT_APP_REDIRECT_URI,
+    };
+  }, [code]);
 
-  const params = {
-    grant_type: "authorization_code",
-    client_id: client_id,
-    code: code,
-    redirect_uri: "http://localhost:3000/login",
-  };
+  useEffect(() => {
+    if (code) {
+      axios
+        .post(
+          `${REACT_APP_COGNITO_DOMAIN}/oauth2/token`,
+          qs.stringify(payload),
+          {
+            auth: {
+              username: REACT_APP_CLIENT_ID,
+              password: REACT_APP_CLIENT_SECRET,
+            },
+          }
+        )
+        .then((response) => {
+          setUserToken(response.data);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+    }
+  }, [code, payload]);
 
-  axios
-    .post(token_url, params, {
-      auth: {
-        username: client_id,
-        password: client_secret,
-      },
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.warn(error);
-    });
-
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   console.log("Logging with", username, password);
-  // };
+  useEffect(() => {
+    if (userToken) {
+      console.log(userToken);
+      axios
+        .get(`${REACT_APP_COGNITO_DOMAIN}/oauth2/userInfo`, {
+          headers: { authorization: `Bearer ${userToken.access_token}` },
+        })
+        .then((response) => {
+          handleUserInfo(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [userToken, handleUserInfo]);
 
   return (
-    // <div className="loginPage">
-    //   <p>This is the landing page with login</p>
-    //   <p>TODO: Authentication</p>
-    //   <form onSubmit={handleLogin}>
-    //     <div>
-    //       <label htmlFor="username">User Name</label>
-    //       <input
-    //         type="text"
-    //         name="username"
-    //         value={username}
-    //         onChange={({ target }) => {
-    //           setUsername(target.value);
-    //         }}
-    //       ></input>
-    //     </div>
-    //     <div>
-    //       <label htmlFor="password">password</label>
-    //       <input
-    //         type="text" //TODO: Change to hidden
-    //         name="password"
-    //         value={password}
-    //         onChange={({ target }) => {
-    //           setPassword(target.value);
-    //         }}
-    //       ></input>
-    //     </div>
-
-    //     <button type="submit">Submit</button>
-    //   </form>
-    //   <a href="/home">Assuming success: To Home</a>
-    // </div>
-    <p>Login</p>
+    //TODO: Fix isLoggedIn State
+    <Redirect to="/home" />
   );
 }
 

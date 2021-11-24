@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+const { REACT_APP_LOGOUT_URI } = process.env;
 
-function Header() {
-  const username = "a-temp-user";
+function Header({ userInfo }) {
+  const username = userInfo.username;
   return (
     <div className="headerWrapper">
       <div className="title">
@@ -27,7 +28,7 @@ function Header() {
           <Link to={"/profile/" + username}>{username}</Link>
         </h2>
         <h2>
-          <a href="\start">Log out</a>
+          <a href={REACT_APP_LOGOUT_URI}>Log out</a>
         </h2>
       </div>
     </div>

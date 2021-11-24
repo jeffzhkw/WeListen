@@ -10,6 +10,9 @@ https://aws.amazon.com/getting-started/hands-on/build-modern-app-fargate-lambda-
 
 https://getstream.io/chat/docs/react/?language=javascript\
 
+//handle events
+//https://reactjs.org/docs/handling-events.html
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, url_for, redirect
+from flask import Flask, render_template, request
 from flask import request
 from flask.templating import render_template
 from flask import jsonify
@@ -28,33 +28,6 @@ def handle_stream_request():
 
     return res
 
-@app.route('/login')
-def signin():
-    return redirect(cognito_signin_url)
-
-@app.route('/cognito_redirect')
-def cognito_redirect():
-    cognito_code = request.args.get('code')
-
-    cognito_domain = 'https://welisten.auth.us-east-1.amazoncognito.com/'
-
-    token_url = f'{cognito_domain}/oauth2/token'
-    auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
-    params = {
-        "grant_type": "authorization_code",
-        "client_id": client_id,
-        "code": cognito_code,
-        "redirect_uri": 'http://localhost:5000/cognito_redirect'
-    }
-    response = requests.post(token_url, auth=auth, data=params)
-    id_token = response.json()['id_token']
-    id_token_decoded = jwt.decode(id_token, options={"verify_signature": False})
-    print(id_token_decoded)
-    user = id_token_decoded['cognito:username']
-
-    
-    return redirect(f"/profile/{user}")
-
 # starting point
 if __name__ == '__main__':
-    app.run()
+    app.run(port=3000, debug=True)
