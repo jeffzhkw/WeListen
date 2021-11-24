@@ -1,6 +1,5 @@
-import { React, useState, useEffect, useMemo } from "react";
+import { React } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 function Song() {
   let { songID } = useParams();

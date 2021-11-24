@@ -1,13 +1,6 @@
-import { React, useCallback } from "react";
-import axios from "axios";
+import { React } from "react";
 
-const {
-  REACT_APP_CLIENT_ID,
-  REACT_APP_CLIENT_SECRET,
-  REACT_APP_COGNITO_DOMAIN,
-  REACT_APP_REDIRECT_URI,
-  REACT_APP_LOGIN_URI,
-} = process.env;
+const { REACT_APP_LOGIN_URI } = process.env;
 
 function Start() {
   return (

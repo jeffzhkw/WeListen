@@ -11,7 +11,6 @@ import Activity from "./containers/Activity";
 import Header from "./components/Header";
 import ControlBar from "./components/Controlbar";
 import Song from "./containers/Song";
-import axios from "axios";
 
 function App() {
   const [currPlaying, setCurrPlaying] = useState();
@@ -39,32 +38,34 @@ function App() {
         <Header userInfo={userInfo} />
         <>
           <Switch>
+            <Route path="/home">
+              <Home handlePlay={handlePlay} />
+            </Route>
+
             <Route path="/groups">
               <Groups />
             </Route>
 
-            <Route path="/home">
-              <Home handlePlay={handlePlay} />
+            <Route path="/activity">
+              <Activity />
+            </Route>
+
+            <Route path="/cognito_redirect">
+              <Login handleUserInfo={handleUserInfo} />
+            </Route>
+
+            <Route path="/profile">
+              <Switch>
+                <Route path="/profile/:username">
+                  <Profile />
+                </Route>
+              </Switch>
             </Route>
 
             <Route path="/song">
               <Switch>
                 <Route path="/song/:songID">
                   <Song />
-                </Route>
-              </Switch>
-            </Route>
-
-            <Route path="/cognito_redirect">
-              <Login handleUserInfo={handleUserInfo} />
-            </Route>
-            <Route path="/activity">
-              <Activity />
-            </Route>
-            <Route path="/profile">
-              <Switch>
-                <Route path="/profile/:username">
-                  <Profile />
                 </Route>
               </Switch>
             </Route>

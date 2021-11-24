@@ -1,8 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 
 function Profile({ userInfo }) {
-  let { username } = useParams();
   if (!userInfo) {
     return;
   } else {
