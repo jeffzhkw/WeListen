@@ -1,13 +1,17 @@
 import React from "react";
 import AudioPlayer from "./Audioplayer";
 
-function ControlBar({ currTitle, currArtist, currStream }) {
+function ControlBar({ currPlaying }) {
   return (
     <div className="controlBarWrapper">
       <p>Playing: </p>
-      <strong>{currTitle}</strong>
-      <strong>{currArtist}</strong>
-      <AudioPlayer audioStream={currStream} />
+      {currPlaying ? <strong>{currPlaying.currTitle}</strong> : <></>}
+      {currPlaying ? <strong>{currPlaying.currArtist}</strong> : <></>}
+      {currPlaying ? (
+        <AudioPlayer audioStream={currPlaying.currStream} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

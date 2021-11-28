@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function SongThumbnail({ title, artist, album, stream, handlePlay }) {
   return (
     <div className="square">
@@ -7,7 +7,7 @@ function SongThumbnail({ title, artist, album, stream, handlePlay }) {
       <h4>{artist}</h4>
       <img src={album} alt="the album cover"></img>
       <p>
-        <a href={"/song/" + title}>To Song detail page</a>
+        <Link to={"/song/" + title}>To Song detail page</Link>
       </p>
       <button
         onClick={() => {

@@ -1,14 +1,13 @@
-import React from "react";
+import { React } from "react";
+
+const { REACT_APP_LOGIN_URI } = process.env;
 
 function Start() {
   return (
     <div>
-      <p>Hello new user, please login or sign up</p>
-
       <p>
-        <a href="https://welisten.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=hmahe8t4gg805bqsk90uvb58d&redirect_uri=http://localhost:5000/cognito_redirect">
-          Login using AWS Cognito
-        </a>
+        Hello, please login or sign up
+        <a href={REACT_APP_LOGIN_URI}>Using AWS Cognito</a>
       </p>
       <p>
         <span>Assuming success: </span>
