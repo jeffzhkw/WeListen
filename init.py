@@ -20,13 +20,13 @@ class Song(db.Model):
     songName = db.Column(db.String(80))
     songArtist = db.Column(db.String(80))
 
-'''
-class TimedComment(db.model):
+
+class TimedComment(db.Model):
     __tablename__ = "TimedComment"
     tcID = db.Column(db.Integer, primary_key = True)
     tcSong = db.Column(db.String(80))
     tcCreator = db.Column(db.String(80))
     tcTimeStamp = db.Column(db.DateTime(timezone=False))
     tcText = db.Column(db.String())
-'''
+
 db.create_all()
