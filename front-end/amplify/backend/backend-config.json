@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "welistenfrontend4aaef9be": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
