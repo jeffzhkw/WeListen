@@ -8,12 +8,6 @@ from init import *
 from search import *
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template("index.html")
-
-
 
 @app.route('/search', methods = ['GET'])
 def handle_stream_request():
