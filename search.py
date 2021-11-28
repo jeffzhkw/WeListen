@@ -42,7 +42,7 @@ def formulate_response(title, artist):
     if not songInDB:
         insert_new_song(songID,title,artist)
     else:
-
+        pass
     #   get data
     # use pafy to convert webstie url to a audio stream url
     video = pafy.new(url)
