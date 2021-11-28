@@ -1,8 +1,5 @@
-from flask import render_template, request, session, url_for, redirect
-from flask import request
+from flask import render_template, request, session, url_for, redirect, jsonify
 from flask.templating import render_template
-from flask import jsonify
-
 
 import requests
 import jwt
