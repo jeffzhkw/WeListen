@@ -12,9 +12,6 @@ import Header from "./components/Header";
 import ControlBar from "./components/Controlbar";
 import Song from "./containers/Song";
 
-import { Authenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-
 function App() {
   const [currPlaying, setCurrPlaying] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -79,16 +76,15 @@ function App() {
         </>
         <ControlBar currPlaying={currPlaying} />
       </Router>
-      <Authenticator>
+      {/* <Authenticator>
         {/* https://ui.docs.amplify.aws/components/authenticator */}
-        {/* https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/ */}
-        {({ signOut, user }) => (
-          <main>
-            <h1>Hello {user.username}</h1>
-            <button onClick={signOut}>Sign out</button>
-          </main>
-        )}
-      </Authenticator>
+      {/* https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/ */}
+      {({ signOut, user }) => (
+        <main>
+          <h1>Hello {user.username}</h1>
+          <button onClick={signOut}>Sign out</button>
+        </main>
+      )}
     </div>
   );
 }
