@@ -46,6 +46,7 @@ def formulate_response(title, artist):
 
     #   get data
     # use pafy to convert webstie url to a audio stream url
+    # TODO: Still bugging gdata=False
     video = pafy.new(url, gdata=False)
     audio = video.getbestaudio()
     audio_url = audio.url
