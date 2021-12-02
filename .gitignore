@@ -3,5 +3,5 @@
 
 .idea/
 API_KEYS.py
-.ebignore
+back-end/.ebignore
 .elasticbeanstalk/
