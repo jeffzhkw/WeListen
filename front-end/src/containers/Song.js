@@ -7,6 +7,7 @@ function Song() {
 
   return (
     <div className="songWrapper">
+      <h1>Song</h1>
       <p>{songID}</p>
     </div>
   );

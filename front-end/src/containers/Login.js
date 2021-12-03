@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useLocation, Redirect } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 import axios from "axios";
 import qs from "qs";
@@ -64,7 +64,7 @@ function Login({ handleUserInfo }) {
 
   return (
     //TODO: Fix isLoggedIn State
-    <Redirect to="/home" />
+    <Navigate to="/home" />
   );
 }
 

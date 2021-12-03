@@ -26,6 +26,15 @@
   justify-self: flex-end;
 }
 
+.navBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.navBar > * {
+  margin: auto 10px;
+}
+
 /*mobile style*/
 @media (max-width: 600px) {
   .App {
