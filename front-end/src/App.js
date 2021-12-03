@@ -1,5 +1,10 @@
 import React, { useState, useCallback } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./css/App.css";
 import Home from "./containers/Home";
 import Groups from "./containers/Groups";
@@ -28,68 +33,48 @@ function App() {
     });
   }, []);
 
-  const handleUserInfo = useCallback((userInfo) => {
-    console.log(userInfo);
-    setIsLoggedIn(true);
-    setUserInfo(userInfo);
-  }, []);
-
   return (
     <div className="App">
       {console.log(isLoggedIn)}
+
       <Router>
-        <Header userInfo={userInfo} />
-        <>
-          <Switch>
-            <Route path="/home">
-              <Home handlePlay={handlePlay} />
-            </Route>
-
-            <Route path="/groups">
-              <Groups />
-            </Route>
-
-            <Route path="/activity">
-              <Activity />
-            </Route>
-
-            <Route path="/cognito_redirect">
-              <Login handleUserInfo={handleUserInfo} />
-            </Route>
-
-            <Route path="/profile">
-              <Switch>
-                <Route path="/profile/:username">
-                  <Profile />
-                </Route>
-              </Switch>
-            </Route>
-
+        <Routes>
+          <Route path="/" element={<Header user={userInfo} />}>
             <Route path="/song">
-              <Switch>
-                <Route path="/song/:songID">
-                  <Song />
-                </Route>
-              </Switch>
+              <Route path=":songID" element={<Song />} />
             </Route>
-            <Route path="/">
-              <Start />
-              <Authenticator>
-                {/* <Authenticator>
-        {/* https://ui.docs.amplify.aws/components/authenticator */}
-                {/* https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/ */}
-                {({ signOut, user }) => (
-                  <main>
-                    <h1>Hello {user.username}</h1>
-                    <button onClick={signOut}>Sign out</button>
-                  </main>
-                )}
-              </Authenticator>
+
+            <Route path="/user">
+              <Route path=":username" element={<Profile />} />
             </Route>
-          </Switch>
-        </>
-        <ControlBar currPlaying={currPlaying} />
+
+            <Route path="/activity" element={<Activity />}></Route>
+
+            <Route path="/groups" element={<Groups />}></Route>
+
+            <Route
+              path="/home"
+              element={<Home handlePlay={handlePlay} />}
+            ></Route>
+
+            <Route
+              path="/login"
+              element={
+                <Authenticator>
+                  {({ signOut, user }) => {
+                    console.log(user);
+                    setUserInfo(user);
+                    return <Navigate to="/home" />;
+                  }}
+                </Authenticator>
+              }
+            ></Route>
+
+            <Route path="/" element={<Start />}></Route>
+          </Route>
+        </Routes>
       </Router>
+      <ControlBar currPlaying={currPlaying} />
     </div>
   );
 }

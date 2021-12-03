@@ -70,6 +70,7 @@ function SearchSong({ handlePlay }) {
         <button type="submit">Submit</button>
       </form>
       {/* TODO: Generate a list of result from Flask Query */}
+      {/* TODO: Best match + potential result*/}
       <div>
         <SongThumbnail
           title={resTitle}
