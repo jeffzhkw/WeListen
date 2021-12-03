@@ -7,10 +7,6 @@ import jwt
 from app import app
 from app.search import formulate_response
 
-@app.route('/hello')
-def display():
-    print("reached here")
-    return render_template('index.html')
 
 
 @app.route('/search', methods = ['GET'])
