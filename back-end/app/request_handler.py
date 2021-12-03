@@ -19,6 +19,21 @@ def handle_stream_request():
 
     return res
 
+@app.route("/newUser", methods = ['POST'])
+def deliver_newuser_todb():
+    username = request.form['username']
+
+    #TODO: insert to db
+    return True
+
+@app.route("/getUser", methods = ['POST'])
+def get_user_info():
+    username = request.form['username']
+
+    #TODO: form database, phrase into a JSON file
+
+    return #THE JSON file;
+
 # starting point
 #if __name__ == '__main__':
     #app.run(port=3000, debug=True)
