@@ -1,7 +1,8 @@
 from googleapiclient.discovery import build
 import pafy
 
-from init import *
+from API_KEYS import *
+from app.models import *
 
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
@@ -47,7 +48,8 @@ def formulate_response(title, artist):
     #   get data
     # use pafy to convert webstie url to a audio stream url
     # TODO: Still bugging gdata=False
-    video = pafy.new(url, gdata=False)
+    #video = pafy.new(url, gdata=False)
+    video = pafy.new(url, basic=False)
     audio = video.getbestaudio()
     audio_url = audio.url
 

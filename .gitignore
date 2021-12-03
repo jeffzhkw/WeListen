@@ -1,0 +1,7 @@
+/__pycache__
+/venv
+
+.idea/
+back-end/API_KEYS.py
+back-end/.ebignore
+.elasticbeanstalk/
