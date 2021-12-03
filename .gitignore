@@ -2,6 +2,6 @@
 /venv
 
 .idea/
-API_KEYS.py
+back-end/API_KEYS.py
 back-end/.ebignore
 .elasticbeanstalk/
