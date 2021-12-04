@@ -72,9 +72,7 @@ Under project dictionary:
 
 > Start a development server.
 
-## 3. Git: First Time Setup
-
-### [Configure Git Upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork)
+## 3. Git: First Time Setup: [Configure Git Upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork)
 
 > Add root repo as a upstream.
 
