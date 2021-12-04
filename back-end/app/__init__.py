@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -11,3 +10,4 @@ CORS(app)
 db = SQLAlchemy(app)
 
 from app import request_handler, models
+print("last one")
