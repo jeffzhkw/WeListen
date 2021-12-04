@@ -6,11 +6,19 @@ WeListen is built using React library and Flask. It's a senior design project ma
 
 ## 0. Prerequisite:
 
-- Node.js
-- npm
-- python
+- Node.js: version @16.x.x
+  - Use `node -v` to check version
+- npm: version @8.x.x.
+  - Use `npm -v` to check version
+- python: version @3.7.x/@3.8.x.
+  - Use `python3 -V` to check version.
 - Homebrew
-- Git CLI logged in with github account
+  - Download from https://brew.sh/
+- Git
+- Git CLI, gh installed: `brew install gh`
+- Git set up with your github account: `gh auth login`
+- A forked repo at your remote and cloned into your local machine
+- Visual Studio Code
 
 ## 1. React: First Time Setup
 
