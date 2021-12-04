@@ -1,7 +1,7 @@
 import { React, useState, useMemo } from "react";
 import SongThumbnail from "../components/Songthumbnail";
-
 import axios from "axios";
+const { REACT_APP_API_URL } = process.env;
 
 function SearchSong({ handlePlay }) {
   const [title, setTitle] = useState();
@@ -10,7 +10,7 @@ function SearchSong({ handlePlay }) {
   const [resArtist, setResArtist] = useState();
   const [audioStream, setAudioStream] = useState();
 
-  const URL = `http://localhost:5000/search?title=${title}&artist=${artist}`;
+  const URL = `${REACT_APP_API_URL}/search?title=${title}&artist=${artist}`;
 
   const { audioData } = useMemo(() => {
     if (!audioStream) return { audioData: "" };
