@@ -3,17 +3,21 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 const { REACT_APP_LOGOUT_URI } = process.env;
 
-function Header({ user }) {
+function Header({ userInfo, setIsLoggedIn, setUserInfo }) {
   const navigate = useNavigate();
+
   async function signOut() {
     try {
       await Auth.signOut();
       console.log("SignOut");
+      setIsLoggedIn(false);
+      setUserInfo({});
       navigate(`/`);
     } catch (error) {
       console.log("error signing out: ", error);
     }
   }
+
   const username = "temp user";
   return (
     <>
@@ -39,7 +43,7 @@ function Header({ user }) {
 
         <div className="userDetail">
           <h2>
-            <Link to={"/user/" + user.username}>{user.username}</Link>
+            <Link to={"/user/" + userInfo.username}>{userInfo.username}</Link>
           </h2>
           <h2>
             <button onClick={signOut}>Sign Out</button>

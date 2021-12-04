@@ -9,7 +9,6 @@ import "./css/App.css";
 import Home from "./containers/Home";
 import Groups from "./containers/Groups";
 
-import Login from "./containers/Login";
 import Start from "./containers/Start";
 import Profile from "./containers/Profile";
 import Activity from "./containers/Activity";
@@ -39,7 +38,16 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path="/" element={<Header user={userInfo} />}>
+          <Route
+            path="/"
+            element={
+              <Header
+                userInfo={userInfo}
+                setIsLoggedIn={setIsLoggedIn}
+                setUserInfo={setUserInfo}
+              />
+            }
+          >
             <Route path="/song">
               <Route path=":songID" element={<Song />} />
             </Route>
@@ -62,8 +70,9 @@ function App() {
               element={
                 <Authenticator>
                   {({ signOut, user }) => {
-                    console.log(user);
+                    console.log(`userInfo`, user);
                     setUserInfo(user);
+                    setIsLoggedIn(true);
                     return <Navigate to="/home" />;
                   }}
                 </Authenticator>
