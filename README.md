@@ -2,17 +2,43 @@
 
 WeListen is built using React library and Flask. It's a senior design project made by [Meihui Jin](https://github.com/MikoJin99), [Yanjun Meng](https://github.com/ymeng1834), [Chris Xu](https://github.com/chrisxhhh/), [Kewei Zhang](https://github.com/jeffzhkw/).
 
-# !----Attention for Git Version Control----!
+# Step by step guide for environment setup.
 
-## Important: [Configure Git Upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork)
+## 0. Prerequisite:
 
-Always do `git fetch upstream main` before staring any development process.
+- Node.js
+- npm
+- python
+- Homebrew
+- Git CLI logged in with github account
 
-# Quick Start
+## 1. React: First Time Setup
 
-## Flask: First Time Setup
+### `cd front-end`
+
+> Change dictionary to `front-end`
+
+### `npm install`
+
+> Install required packages for frontend debugging.
+
+### Download `aws-exports.js` and move to `/front-end/src`
+
+> Necessary configuration file for AWS authentication.
+
+### `npm start`
+
+> Run under `front-end` dictionary.\
+> It start a local server only with React components.
+> See `front-end/README.md` for more details.
+
+## 2. Flask: First Time Setup
 
 Under project dictionary:
+
+### `cd back-end`
+
+> Change dictionary to `back-end`
 
 ### `python3 -m venv venv`
 
@@ -24,33 +50,41 @@ Under project dictionary:
 > Activate the virtual environment. \
 > Once activated, you will see `(venv)` at the very front each line within the terminal
 
+### `brew install postgresql`
+
+> Install PostgreSQL database for later flask package install.
+
 ### `pip install -r requirements.txt`
 
 > Run the command under `(venv)`.\
 > Install packages stated in the requirement.txt into virtual environment.\
-> Run every time after the .txt changed.
+> Run every time after the .txt is modified by other developer.
+
+### Download `API_KEYS.py` and move to `/back-end`
+
+> Necessary configuration file for Youtube and database.
+
+### Comment out `line 54` in file `/back-end/venv/lib/pafy/backend_youtube_dl.py`
+
+> Fix Youtube remove dislike visibility
 
 ### `flask run`
 
 > Start a development server.
 
-## React: First Time Setup
+## 3. Git: First Time Setup
 
-### `cd front-end`
+### [Configure Git Upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork)
 
-> Change dictionary to `front-end`
+> Add root repo as a upstream.
 
-### `npm install`
+# !----Attention for Git Version Control----!
 
-> Install required packages for frontend debugging.
+## Important: Always do `git fetch upstream main` before staring any development process.
 
-### `npm start`
+# Commands
 
-> Run under `front-end` dictionary.\
-> It start a local server only with React components.
-> See `front-end/README.md` for more details.
-
-# !----Attention for Backend Development----!
+# !----Backend Development----!
 
 ## Use virtual environement. Here are list of useful commands:
 
