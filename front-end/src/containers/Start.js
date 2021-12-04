@@ -1,8 +1,6 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
 
-const { REACT_APP_LOGIN_URI } = process.env;
-
 function Start() {
   return (
     <div>

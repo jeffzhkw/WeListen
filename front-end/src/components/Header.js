@@ -1,9 +1,8 @@
 import React from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-const { REACT_APP_LOGOUT_URI } = process.env;
 
-function Header({ userInfo, setIsLoggedIn, setUserInfo }) {
+function Header({ isLoggedIn, userInfo, setIsLoggedIn, setUserInfo }) {
   const navigate = useNavigate();
 
   async function signOut() {
@@ -18,7 +17,6 @@ function Header({ userInfo, setIsLoggedIn, setUserInfo }) {
     }
   }
 
-  const username = "temp user";
   return (
     <>
       <div className="headerWrapper">
@@ -41,17 +39,19 @@ function Header({ userInfo, setIsLoggedIn, setUserInfo }) {
           </h2>
         </nav>
 
-        <div className="userDetail">
-          <h2>
-            <Link to={"/user/" + userInfo.username}>{userInfo.username}</Link>
-          </h2>
-          <h2>
-            <button onClick={signOut}>Sign Out</button>
-          </h2>
-        </div>
+        {isLoggedIn ? (
+          <div className="userDetail">
+            <h2>
+              <Link to={"/user/" + userInfo.username}>{userInfo.username}</Link>
+            </h2>
+            <h2>
+              <button onClick={signOut}>Sign Out</button>
+            </h2>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-
-      <Outlet />
     </>
   );
 }

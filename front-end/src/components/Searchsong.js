@@ -1,12 +1,7 @@
-import { React, useState, useEffect, useMemo } from "react";
-import { useLocation } from "react-router";
+import { React, useState, useMemo } from "react";
 import SongThumbnail from "../components/Songthumbnail";
 
 import axios from "axios";
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 
 function SearchSong({ handlePlay }) {
   const [title, setTitle] = useState();
@@ -17,22 +12,19 @@ function SearchSong({ handlePlay }) {
 
   const URL = `http://localhost:5000/search?title=${title}&artist=${artist}`;
 
-  let query = useQuery();
-
-  useEffect(() => {
-    const artistInput = query.get("artist");
-    const titleInput = query.get("title");
-    if (artistInput) {
-      setArtist(artistInput);
+  const { audioData } = useMemo(() => {
+    if (!audioStream) return { audioData: "" };
+    else {
+      return {
+        audioData: audioStream,
+      };
     }
-    if (titleInput) {
-      setTitle(titleInput);
-    }
-  }, [query]);
+  }, [audioStream]);
 
-  useEffect(() => {
+  const handleSearch = (e) => {
+    console.log("Handled");
+    e.preventDefault();
     if (title && artist) {
-      console.log("Begin Axios");
       axios
         .get(URL)
         .then((response) => {
@@ -45,32 +37,38 @@ function SearchSong({ handlePlay }) {
           console.warn(error);
         });
     }
-  }, [title, artist, URL]);
-
-  const { audioData } = useMemo(() => {
-    if (!audioStream) return { audioData: "" };
-    else {
-      return {
-        audioData: audioStream,
-      };
-    }
-  }, [audioStream]);
+  };
 
   return (
     <div className="songWrapper">
-      <form>
-        <h1>Song</h1>
+      <form onSubmit={handleSearch}>
+        <h1>Search</h1>
 
         <label htmlFor="title">Song Name: </label>
-        <input type="text" name="title" required></input>
+        <input
+          type="text"
+          name="title"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+          required
+        ></input>
 
         <label htmlFor="artist">Artist: </label>
-        <input type="text" name="artist" required></input>
+        <input
+          type="text"
+          name="artist"
+          value={artist}
+          onChange={(e) => {
+            setArtist(e.target.value);
+          }}
+          required
+        ></input>
 
         <button type="submit">Submit</button>
       </form>
       {/* TODO: Generate a list of result from Flask Query */}
-      {/* TODO: Best match + potential result*/}
       <div>
         <SongThumbnail
           title={resTitle}
