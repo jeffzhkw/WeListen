@@ -19,4 +19,9 @@ class TimedComment(db.Model):
     tcTimeStamp = db.Column(db.DateTime(timezone=False))
     tcText = db.Column(db.String())
 
+class Follow(db.Model):
+    __tablename__ = "Follow"
+    follower = db.Column(db.String(80), primary_key = True)
+    followee = db.Column(db.String(80), primary_key = True)
+
 db.create_all()

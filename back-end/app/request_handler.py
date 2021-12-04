@@ -1,11 +1,12 @@
 from flask import render_template, request, session, url_for, redirect, jsonify
 
-
 import requests
 import jwt
 
 from app import app
 from app.search import formulate_response
+from app.follow import add_follow, fetch_follow
+
 
 
 
@@ -33,6 +34,21 @@ def get_user_info():
     #TODO: form database, phrase into a JSON file
 
     return #THE JSON file;
+
+@app.route("/follow", methods = ['GET'])
+def handle_follow_request():
+    follower = request.args.get('username')
+    followee = request.args.get('other')
+
+    res = add_follow(follower, followee)
+    return res
+
+@app.route("/getFollows", methods = ['GET'])
+def display_follows():
+    user = request.args.get('username')
+
+    res = jsonify(fetch_follow(user))
+    return res
 
 # starting point
 #if __name__ == '__main__':
