@@ -32,7 +32,11 @@ function Profile() {
       <h3>Your are following:</h3>
       {following ? (
         following.map((aFollowing, i) => {
-          return <p>{aFollowing}</p>;
+          return (
+            <p>
+              <Link to={"/user/" + aFollowing}>{aFollowing}</Link>
+            </p>
+          );
         })
       ) : (
         <p>No one</p>
@@ -40,12 +44,15 @@ function Profile() {
       <h3>Who follows you</h3>
       {follower ? (
         follower.map((aFollower, i) => {
-          return <p>{aFollower}</p>;
+          return (
+            <p>
+              <Link to={"/user/" + aFollower}>{aFollower}</Link>
+            </p>
+          );
         })
       ) : (
         <p>No one</p>
       )}
-      <Link to="/user">to /user test</Link>
     </div>
   );
 }
