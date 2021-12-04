@@ -30,8 +30,8 @@ function SearchSong({ handlePlay }) {
         .then((response) => {
           console.log(response);
           setAudioStream(response.data.audio_stream);
-          setResArtist(response.data.title);
-          setResTitle(response.data.artist);
+          setResArtist(response.data.artist);
+          setResTitle(response.data.title);
         })
         .catch((error) => {
           console.warn(error);
