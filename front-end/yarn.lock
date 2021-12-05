@@ -5311,7 +5311,7 @@
     "postcss" "^7.0.32"
     "postcss-value-parser" "^4.1.0"
 
-"aws-amplify@^4.3.8", "aws-amplify@3.x.x || 4.x.x":
+"aws-amplify@^4.3.10", "aws-amplify@3.x.x || 4.x.x":
   "integrity" "sha512-goiwtm4d/uGcSVa0Xodb0HrxkJoweHBWxWDv4of+R98gmg9WwzA23YU2awO0mcgErD8FG2pb9WgIc75Gaw0//Q=="
   "resolved" "https://registry.npmjs.org/aws-amplify/-/aws-amplify-4.3.10.tgz"
   "version" "4.3.10"

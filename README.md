@@ -34,6 +34,10 @@ WeListen is built using React library and Flask. It's a senior design project ma
 
 > Necessary configuration file for AWS authentication.
 
+### Download `.env` and move to `/front-end`
+
+> Environment variable that saves React keys.
+
 ### `npm start`
 
 > Run under `front-end` dictionary.\
