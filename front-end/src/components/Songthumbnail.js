@@ -63,6 +63,9 @@ function SongThumbnail({ title, artist, album, stream, handlePlay }) {
       <p>
         <Link to={"/song/" + title}>To Song detail page</Link>
       </p>
+      <p>
+        <Link to={"/activity/" + title}>Share this song</Link>
+      </p>
       <button
         onClick={() => {
           handlePlay(title, artist, stream);

@@ -47,12 +47,12 @@ def post_activity():
 
 @app.route("/newUser", methods = ['POST'])
 def add_new_user_to_db():
-    #username = request.form['username']
+    
     payload = request.get_json()
     username = payload["username"]
-    add_new_user(username)
-
-    return True
+    
+    res = add_new_user(username)
+    return jsonify({"result": res})
 
 
 

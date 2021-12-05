@@ -39,14 +39,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    axios
-      .post(`${REACT_APP_API_URL}/newUser`, { username: userInfo.username })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+    if (userInfo) {
+      axios
+        .post(`${REACT_APP_API_URL}/newUser`, { username: userInfo.username })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+    }
   }, [userInfo]);
 
   return (

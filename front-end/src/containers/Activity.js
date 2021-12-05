@@ -59,6 +59,7 @@ function Activity({ userInfo }) {
             setContent(e.target.value);
           }}
         ></input>
+        <button type="submit">Post</button>
       </form>
       <h2>See what your friends post</h2>
       {postList.map((aPost, i) => {
