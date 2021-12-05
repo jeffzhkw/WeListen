@@ -39,7 +39,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo.username) {
       axios
         .post(`${REACT_APP_API_URL}/newUser`, { username: userInfo.username })
         .then((response) => {

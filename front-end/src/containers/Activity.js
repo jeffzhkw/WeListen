@@ -17,7 +17,8 @@ function Activity({ userInfo }) {
     setSongID(urlSongID);
   }, [urlSongID]);
 
-  const handlePost = () => {
+  const handlePost = (e) => {
+    e.preventDefault();
     axios
       .post(`${REACT_APP_API_URL}/postActivity`, {
         songID: songID,
