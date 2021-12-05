@@ -17,7 +17,8 @@ function Activity({ userInfo }) {
     setSongID(urlSongID);
   }, [urlSongID]);
 
-  const handlePost = () => {
+  const handlePost = (e) => {
+    e.preventDefault();
     axios
       .post(`${REACT_APP_API_URL}/postActivity`, {
         songID: songID,
@@ -49,7 +50,7 @@ function Activity({ userInfo }) {
     <div>
       <h1>Activity</h1>
       <h2>Share a Song</h2>
-      <form action={handlePost}>
+      <form onSubmit={handlePost}>
         <label htmlFor="content">Post your thoughts!!!</label>
         <input
           type="text"
