@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,6 +22,8 @@ import Song from "./containers/Song";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import NotAuthed from "./components/NotAuthed";
+import axios from "@aws-amplify/storage/node_modules/axios";
+const { REACT_APP_API_URL } = process.env;
 
 function App() {
   const [currPlaying, setCurrPlaying] = useState();
@@ -35,6 +37,17 @@ function App() {
       currStream: stream,
     });
   }, []);
+
+  useEffect(() => {
+    axios
+      .post(`${REACT_APP_API_URL}/newUser`, { username: userInfo.username })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  }, [userInfo]);
 
   return (
     <div className="App">
@@ -51,7 +64,9 @@ function App() {
           <Route path="/song" element={isLoggedIn ? <Outlet /> : <NotAuthed />}>
             <Route
               path=":songID"
-              element={isLoggedIn ? <Song /> : <NotAuthed />}
+              element={
+                isLoggedIn ? <Song userInfo={userInfo} /> : <NotAuthed />
+              }
             />
             <Route path="" element={<NotFound />} />
           </Route>
@@ -59,14 +74,18 @@ function App() {
           <Route path="/user" element={isLoggedIn ? <Outlet /> : <NotAuthed />}>
             <Route
               path=":username"
-              element={isLoggedIn ? <Profile /> : <NotAuthed />}
+              element={
+                isLoggedIn ? <Profile userInfo={userInfo} /> : <NotAuthed />
+              }
             />
             <Route path="" element={<NotFound />} />
           </Route>
 
           <Route
             path="/activity"
-            element={isLoggedIn ? <Activity /> : <NotAuthed />}
+            element={
+              isLoggedIn ? <Activity userInfo={userInfo} /> : <NotAuthed />
+            }
           ></Route>
 
           <Route
@@ -80,7 +99,7 @@ function App() {
               isLoggedIn ? <Home handlePlay={handlePlay} /> : <NotAuthed />
             }
           ></Route>
-
+          {/* TODO: Resolve second render. */}
           <Route
             path="/login"
             element={

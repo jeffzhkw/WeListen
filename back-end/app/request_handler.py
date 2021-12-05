@@ -1,14 +1,14 @@
-from flask import render_template, request, session, url_for, redirect, jsonify
+from flask import request, session, jsonify, render_template
 
 import requests
 import jwt
 
 from app import app
-from app.search import formulate_response
+from app.search import formulate_response, search_youtube_url
 from app.follow import add_follow, fetch_follow
 from app.user import add_new_user
 from app.comments import add_comment
-
+from app.activity import post_one_activity, get_activities_oneuser
 
 
 
@@ -22,22 +22,39 @@ def handle_stream_request():
 
     return res
 
+@app.route('/getActivity', methods = ['GET'])
+def get_activity():
+    username = request.args.get('username')
+    following = fetch_follow(username)['followings']
+    posts = {}
+    for person in following:
+        posts[person] = get_activities_oneuser(person)
+    print(posts)
+
+
+
+
+
+@app.route('/postActivity', methods = ['POST'])
+def post_activity():
+    payload = request.get_json()
+    songID = payload['songID']
+    creator = payload['username']
+    content = payload['content']
+
+    # return post time in format: Sat Dec  4 19:08:43 2021
+    return post_one_activity(songID,content,creator)
+
 @app.route("/newUser", methods = ['POST'])
 def add_new_user_to_db():
-    username = request.form['username']
+    #username = request.form['username']
+    payload = request.get_json()
+    username = payload["username"]
     add_new_user(username)
 
     return True
 
-'''
-@app.route("/getUser", methods = ['POST'])
-def get_user_info():
-    username = request.form['username']
 
-    #TODO: form database, phrase into a JSON file
-
-    return #THE JSON file;
-'''
 
 @app.route("/follow", methods = ['GET'])
 def handle_follow_request():
@@ -47,22 +64,29 @@ def handle_follow_request():
     res = jsonify(add_follow(follower, followee))
     return res
 
-@app.route("/getFollows", methods = ['GET'])
+@app.route("/getFollowers", methods = ['GET'])
 def display_follows():
     user = request.args.get('username')
 
     res = jsonify(fetch_follow(user))
     return res
 
-@app.route("/comment", methods = ['POST'])
+@app.route("/writeComment", methods = ['POST'])
 def handle_new_comment():
-    user = request.form['username']
-    song = request.form['songID']
-    ts = request.form['timestamp']
-    comments = request.form['comments']
+    payload = request.get_json()
+    user = payload['username']
+    song = payload['songID']
+    ts = payload['timestamp']
+    comments = payload['comments']
+    #print(user, song, ts, comments): TODO: data correct, database not show
 
     res = jsonify(add_comment(user, song, ts, comments))
     return res
+
+@app.route("/youtubeDetail", methods=['GET'])
+def get_youtube_detail():
+    youtubeURL = request.args.get('songID')
+    return jsonify(formulate_response(youtubeURL,''))
 
 
 

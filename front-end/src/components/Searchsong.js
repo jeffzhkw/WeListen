@@ -1,4 +1,4 @@
-import { React, useState, useMemo } from "react";
+import { React, useState } from "react";
 import SongThumbnail from "../components/Songthumbnail";
 import axios from "axios";
 const { REACT_APP_API_URL } = process.env;
@@ -6,32 +6,25 @@ const { REACT_APP_API_URL } = process.env;
 function SearchSong({ handlePlay }) {
   const [title, setTitle] = useState();
   const [artist, setArtist] = useState();
+  const [resSongID, setResSongID] = useState();
+
   const [resTitle, setResTitle] = useState();
   const [resArtist, setResArtist] = useState();
   const [audioStream, setAudioStream] = useState();
 
   const URL = `${REACT_APP_API_URL}/search?title=${title}&artist=${artist}`;
 
-  const { audioData } = useMemo(() => {
-    if (!audioStream) return { audioData: "" };
-    else {
-      return {
-        audioData: audioStream,
-      };
-    }
-  }, [audioStream]);
-
   const handleSearch = (e) => {
-    console.log("Handled");
+    console.log("Handled search");
     e.preventDefault();
     if (title && artist) {
       axios
         .get(URL)
         .then((response) => {
-          console.log(response);
+          setResSongID(response.data.songID);
           setAudioStream(response.data.audio_stream);
-          setResArtist(response.data.artist);
-          setResTitle(response.data.title);
+          setResArtist(response.data.video_title);
+          setResTitle(response.data.artist);
         })
         .catch((error) => {
           console.warn(error);
@@ -68,14 +61,19 @@ function SearchSong({ handlePlay }) {
 
         <button type="submit">Submit</button>
       </form>
+
       {/* TODO: Generate a list of result from Flask Query */}
       <div>
-        <SongThumbnail
-          title={resTitle}
-          artist={resArtist}
-          stream={audioData}
-          handlePlay={handlePlay}
-        />
+        {/* TODO: Switch link to use songID */}
+        {/* <SongThumbnail songID={resSongID} handlePlay={handlePlay} /> */}
+        <div>
+          <SongThumbnail
+            title={resTitle}
+            artist={resArtist}
+            stream={audioStream}
+            handlePlay={handlePlay}
+          />
+        </div>
       </div>
     </div>
   );
