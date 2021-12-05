@@ -5,7 +5,7 @@ import jwt
 
 from app import app
 from app.search import formulate_response, search_youtube_url
-from app.follow import add_follow, fetch_follow
+from app.follow import add_follow, fetch_follow, remove_follow
 from app.user import add_new_user
 from app.comments import add_comment
 from app.activity import post_one_activity, get_activities_oneuser
@@ -69,6 +69,14 @@ def display_follows():
     user = request.args.get('username')
 
     res = jsonify(fetch_follow(user))
+    return res
+
+@app.route("/unfollow", methods = ['GET'])
+def handle_unfollow_request():
+    user = request.args.get('username')
+    unfollow = request.args.get('other')
+
+    res = jsonify(remove_follow(user, unfollow))
     return res
 
 @app.route("/writeComment", methods = ['POST'])

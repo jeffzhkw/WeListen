@@ -3,19 +3,17 @@ from sqlalchemy.exc import SQLAlchemyError
 
 
 def add_follow(user, following):
-    new_follow = Follow(follower =user, followee = following)
-    db.session.add(new_follow)
+    new_follow = Follow(follower=user, followee=following)
     try:
+        db.session.add(new_follow)
         db.session.commit()
     except SQLAlchemyError:
         status = False
         msg = "User not found"
-        response_dict = {"status": status,
-                         "message": msg, }
-        return response_dict
+    else:
+        status = True
+        msg = "Success"
 
-    status = True
-    msg = ""
     response_dict = {"status": status,
                      "message": msg,}
     return response_dict
@@ -35,4 +33,19 @@ def fetch_follow(user):
     response_dict = {"followers": followers_ls,
                      "followings": followings_ls,
                      }
+    return response_dict
+
+def remove_follow(user, unfollow):
+    un_follow = Follow.query.filter_by(follower=user, followee=unfollow).first()
+    try:
+        db.session.delete(un_follow)
+        db.session.commit()
+    except SQLAlchemyError:
+        status = False
+        msg = "User not found"
+    else:
+        status = True
+        msg = "Success"
+    response_dict = {"status": status,
+                     "message": msg, }
     return response_dict
