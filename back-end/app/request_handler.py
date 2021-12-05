@@ -44,13 +44,11 @@ def post_activity():
     # return post time in format: Sat Dec  4 19:08:43 2021
     return post_one_activity(songID,content,creator)
 
-@app.route("/newUser", methods = ['GET','POST'])
+@app.route("/newUser", methods = ['POST'])
 def add_new_user_to_db():
-    if request.method == 'POST':
-        username = request.form['username']
-        res = add_new_user(username)
-        return jsonify({"result": res})
-    return render_template('base.html')
+    username = request.form['username']
+    res = add_new_user(username)
+    return jsonify({"result": res})
 
 
 
