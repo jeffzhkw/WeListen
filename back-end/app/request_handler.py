@@ -8,7 +8,7 @@ from app.search import formulate_response, search_youtube_url
 from app.follow import add_follow, fetch_follow
 from app.user import add_new_user
 from app.comments import add_comment
-from app.activity import post_one_activity, get_activity_oneuser
+from app.activity import post_one_activity, get_activities_oneuser
 
 
 
@@ -28,7 +28,7 @@ def get_activity():
     following = fetch_follow(username)['followings']
     posts = {}
     for person in following:
-        posts[person] = get_activity_oneuser(person)
+        posts[person] = get_activities_oneuser(person)
     print(posts)
 
 
@@ -47,9 +47,8 @@ def post_activity():
 @app.route("/newUser", methods = ['POST'])
 def add_new_user_to_db():
     username = request.form['username']
-    add_new_user(username)
-
-    return True
+    res = add_new_user(username)
+    return jsonify({"result": res})
 
 
 
