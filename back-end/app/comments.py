@@ -8,7 +8,7 @@ def add_comment(user, song, ts, comments):
         db.session.commit()
     except SQLAlchemyError:
         status = False
-        msg = "User not found"
+        msg = "Something went wrong"
     else:
         status = True
         msg = ""
