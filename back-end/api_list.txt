@@ -62,5 +62,5 @@ APIs
     - front-end
         - username
     - back-end
-        - return true (always true)
+        - return a json file with result: true/false
 

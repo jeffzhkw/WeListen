@@ -1,5 +1,5 @@
 from app.models import *
-# from sqlalchemy.exc import SQLAlchemyError
+
 import time
 
 
