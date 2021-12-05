@@ -20,6 +20,7 @@ def search_youtube_url(title, artist):
     return search_response['items']
 
 
+
 def insert_new_song(id, title, artist,):
     newSong = Song(songID=id, songName=title,songArtist=artist)
     db.session.add(newSong)
@@ -33,31 +34,43 @@ def formulate_response(title, artist):
 
     # use search function
     search_response = search_youtube_url(title, artist)
+
+    #extract information
     songID = search_response[0]['id']['videoId']
     url = "https://www.youtube.com/watch?v="+songID
-    print(url)
     channelName = search_response[0]['snippet']['channelTitle']
     songTitle = search_response[0]['snippet']['title']
-    #query in database for songID
+    thumbnails = search_response[0]['snippet']['thumbnails']
+
+    #query in database using songID
     songInDB = Song.query.filter_by(songID=songID).first()
     comment = TimedComment.query.filter_by(tcSong=songID).all()
     if not songInDB:
         insert_new_song(songID,title,artist)
 
 
-    #   get data
+    # get data
     # use pafy to convert webstie url to a audio stream url
     # TODO: Still bugging gdata=False
     #video = pafy.new(url, gdata=False)
     video = pafy.new(url, basic=False)
+    # print(video.length)
+    duration = video.length
+    num_likes = video.likes
+    num_views = video.viewcount
+    video_title = video.title
     audio = video.getbestaudio()
     audio_url = audio.url
 
     response_dict = {"title":title,
                      "artist":channelName,
-                     "youtubeURL": url,
                      "audio_stream": audio_url,
                      "comment": comment,
+                     "songID": songID,
+                     "thumbnails": thumbnails,
+                     "duration": duration,
+                     "num_likes": num_likes,
+                     "video_title": video_title,
                      }
     print(response_dict)
     return response_dict
