@@ -18,9 +18,9 @@ def handle_stream_request():
     artist = request.args.get('artist', '')
     print("reached flask", title, artist)
 
-    res = jsonify(formulate_response(title,artist))
-
-    return res
+    res = {"songID": search_youtube_url(title,artist)[0]['id']['videoId']
+           }
+    return jsonify(res)
 
 @app.route('/getActivity', methods = ['GET'])
 def get_activity():
@@ -29,7 +29,7 @@ def get_activity():
     posts = {}
     for person in following:
         posts[person] = get_activities_oneuser(person)
-    print(posts)
+    return posts
 
 
 
@@ -86,7 +86,7 @@ def handle_new_comment():
 @app.route("/youtubeDetail", methods=['GET'])
 def get_youtube_detail():
     youtubeURL = request.args.get('songID')
-    return jsonify(formulate_response(youtubeURL,''))
+    return jsonify(formulate_response(youtubeURL))
 
 
 

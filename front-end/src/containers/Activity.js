@@ -49,7 +49,7 @@ function Activity({ userInfo }) {
     <div>
       <h1>Activity</h1>
       <h2>Share a Song</h2>
-      <form action={handlePost}>
+      <form onSubmit={handlePost}>
         <label htmlFor="content">Post your thoughts!!!</label>
         <input
           type="text"

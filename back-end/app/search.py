@@ -27,16 +27,20 @@ def insert_new_song(id, title, artist,):
     db.session.commit()
 
 
+
 # prepare the format for returning search song request
 # return a python dictionary
-def formulate_response(title, artist):
+def formulate_response(songID):
     response_dict = {}
 
     # use search function
-    search_response = search_youtube_url(title, artist)
+    search_response = search_youtube_url(songID, "")
+    print("here")
+    print(search_response)
 
     #extract information
     songID = search_response[0]['id']['videoId']
+    print(songID)
     url = "https://www.youtube.com/watch?v="+songID
     channelName = search_response[0]['snippet']['channelTitle']
     songTitle = search_response[0]['snippet']['title']
@@ -62,7 +66,7 @@ def formulate_response(title, artist):
     audio = video.getbestaudio()
     audio_url = audio.url
 
-    response_dict = {"title":title,
+    response_dict = {
                      "artist":channelName,
                      "audio_stream": audio_url,
                      "comment": comment,
