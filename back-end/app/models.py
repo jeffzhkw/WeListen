@@ -24,4 +24,14 @@ class Follow(db.Model):
     follower = db.Column(db.String(80), primary_key = True)
     followee = db.Column(db.String(80), primary_key = True)
 
+class Post(db.Model):
+    __tablename__ = "Post"
+    postID = db.Column(db.Integer, primary_key=True)
+    postCreator = db.Column(db.String(80))
+    postDate = db.Column(db.DateTime(timezone=False))
+    postSong = db.Column(db.String(80))
+    postCaption = db.Column(db.String(80))
+    # postPublic = db.Column(db.Integer) # post public or not
+
+
 db.create_all()

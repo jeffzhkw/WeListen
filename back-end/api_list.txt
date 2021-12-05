@@ -1,0 +1,66 @@
+APIs
+- search
+    - front-end
+        - give song name and artist
+    - back-end
+        - return best match:
+            title(user inputted) + channel name + stream + songID(from youtube) + thumbnails(3 sizes)
+            + duration (in seconds) + num_likes + video_title(actual ytube title)
+
+- getActivity
+    - front-end
+        - username
+    - back-end (need test)
+        - list of post of {username}’s follower’s all posts.
+
+- postActivity (POST)
+    - front-end
+        - songID(from youtube)
+        - username
+        - content
+    - back-end
+        - time posted in format: "Sat Dec  4 19:08:43 2021"
+
+- getComment (combined in search function, no direct route)
+    - front-end
+        - songID
+    - back-end
+        - song comment(/w timestamp)
+
+- writeComment
+    - front-end
+        - songID
+        - comment content
+        - timestamp
+        - username
+    - back-end
+        - S/F
+
+- getFollowers
+    - front-end
+        - username
+    - back-end
+        - a json file of followers of {username}
+
+- follow: a user follow a user
+    - front-end
+        - username
+        - other(to be followed)
+    - back-end
+        - return status(s/f) and a message
+
+- youtubeDetail
+    - front-end
+        - songID
+    - back-end
+        - used search song function above, return the same things
+        - return: title(user inputted) + channel name + stream + songID(from youtube) + thumbnails(3 sizes)
+            + duration (in seconds) + num_likes + video_title(actual ytube title)
+
+
+- newUser: place new user in db after registration
+    - front-end
+        - username
+    - back-end
+        - return true (always true)
+
