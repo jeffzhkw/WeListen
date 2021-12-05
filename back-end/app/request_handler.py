@@ -29,7 +29,7 @@ def get_activity():
     posts = {}
     for person in following:
         posts[person] = get_activities_oneuser(person)
-    return posts
+    return jsonify(posts)
 
 
 
