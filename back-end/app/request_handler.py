@@ -7,7 +7,7 @@ from app import app
 from app.search import formulate_response, search_youtube_url
 from app.follow import add_follow, fetch_follow, remove_follow
 from app.user import add_new_user
-from app.comments import add_comment
+from app.comments import add_comment, get_comment_of_song
 from app.activity import post_one_activity, get_activities_oneuser
 
 
@@ -78,6 +78,14 @@ def handle_unfollow_request():
 
     res = jsonify(remove_follow(user, unfollow))
     return res
+
+@app.route("/getComment", methods = ['GET'])
+def get_comments():
+    songID = request.args.get('songID')
+    res = get_comment_of_song(songID)
+
+    return jsonify(res)
+    #return comments_json
 
 @app.route("/writeComment", methods = ['POST'])
 def handle_new_comment():

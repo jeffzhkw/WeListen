@@ -7,6 +7,14 @@ from app.models import *
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 
+
+def insert_new_song(id, title, artist,):
+    newSong = Song(songID=id, songName=title,songArtist=artist)
+    db.session.add(newSong)
+    db.session.commit()
+
+
+
 def search_youtube_url(title, artist):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
                     developerKey=DEVELOPER_KEY)
@@ -15,16 +23,14 @@ def search_youtube_url(title, artist):
     # https://developers.google.com/youtube/v3/docs/search#resource
     search_response = youtube.search().list(q = title+" "+artist, part='id,snippet',maxResults=1).execute()
 
+    songID = search_response['item'][0]['id']['videoId']
+    songInDB = Song.query.filter_by(songID=songID).first()
+    if not songInDB:
+        insert_new_song(songID,title,artist)
     # videoId = search_response['items'][0]['id']['videoId']
     #print(search_response)
     return search_response['items']
 
-
-
-def insert_new_song(id, title, artist,):
-    newSong = Song(songID=id, songName=title,songArtist=artist)
-    db.session.add(newSong)
-    db.session.commit()
 
 
 
@@ -47,10 +53,8 @@ def formulate_response(songID):
     thumbnails = search_response[0]['snippet']['thumbnails']
 
     #query in database using songID
-    songInDB = Song.query.filter_by(songID=songID).first()
-    comment = TimedComment.query.filter_by(tcSong=songID).all()
-    if not songInDB:
-        insert_new_song(songID,title,artist)
+
+
 
 
     # get data
@@ -69,7 +73,6 @@ def formulate_response(songID):
     response_dict = {
                      "artist":channelName,
                      "audio_stream": audio_url,
-                     "comment": comment,
                      "songID": songID,
                      "thumbnails": thumbnails,
                      "duration": duration,
