@@ -13,6 +13,7 @@ function SongThumbnail({ youtubeID, handlePlay }) {
   }, [youtubeID]);
 
   useEffect(() => {
+    console.log(songID);
     if (songID) {
       axios
         .get(`${REACT_APP_API_URL}/youtubeDetail?songID=${songID}`)
