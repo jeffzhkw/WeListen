@@ -86,7 +86,11 @@ function App() {
             <Route
               path=":username"
               element={
-                isLoggedIn ? <Profile userInfo={userInfo} /> : <NotAuthed />
+                isLoggedIn ? (
+                  <Profile userInfo={userInfo} handlePlay={handlePlay} />
+                ) : (
+                  <NotAuthed />
+                )
               }
             />
             <Route path="" element={<NotFound />} />
@@ -109,7 +113,11 @@ function App() {
           <Route
             path="/home"
             element={
-              isLoggedIn ? <Home handlePlay={handlePlay} /> : <NotAuthed />
+              isLoggedIn ? (
+                <Home handlePlay={handlePlay} userInfo={userInfo} />
+              ) : (
+                <NotAuthed />
+              )
             }
           ></Route>
           {/* TODO: Resolve second render. */}

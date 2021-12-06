@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import SendIcon from "@mui/icons-material/Send";
 const { REACT_APP_API_URL } = process.env;
 
-function SearchSong({ handlePlay }) {
+function SearchSong({ handlePlay, userInfo }) {
   const [title, setTitle] = useState();
   const [artist, setArtist] = useState();
   const [resSongID, setResSongID] = useState();
@@ -74,7 +74,15 @@ function SearchSong({ handlePlay }) {
       {/* TODO: Generate a list of result from Flask Query */}
       <div>
         {/* TODO: Switch link to use songID */}
-        <SongThumbnail youtubeID={resSongID} handlePlay={handlePlay} />
+        {resSongID ? (
+          <SongThumbnail
+            youtubeID={resSongID}
+            handlePlay={handlePlay}
+            userInfo={userInfo}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

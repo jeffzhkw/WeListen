@@ -15,7 +15,7 @@ function Activity({ userInfo }) {
   const urlSongID = query.get("urlSongID");
 
   /* TODO: Share songID, content, username */
-  const username = userInfo.username;
+
   const [content, setContent] = useState();
   const [songID, setSongID] = useState();
 
@@ -28,7 +28,7 @@ function Activity({ userInfo }) {
     axios
       .post(`${REACT_APP_API_URL}/postActivity`, {
         songID: songID,
-        username: username,
+        username: userInfo.username,
         content: content,
       })
       .then((res) => {
@@ -43,15 +43,18 @@ function Activity({ userInfo }) {
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${REACT_APP_API_URL}/getActivity`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (userInfo) {
+      axios
+        .get(`${REACT_APP_API_URL}/getActivity?username=${userInfo.username}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [userInfo]);
+
   return (
     <div className="containerWrapper">
       <h1>Activity</h1>

@@ -4,10 +4,11 @@ import axios from "axios";
 
 import CheckIcon from "@mui/icons-material/Check";
 import ToggleButton from "@mui/material/ToggleButton";
+import SongThumbnail from "../components/Songthumbnail";
 
 const { REACT_APP_API_URL } = process.env;
 
-function Profile({ userInfo }) {
+function Profile({ userInfo, handlePlay }) {
   let { username } = useParams();
 
   const loggedInUser = userInfo.username;
@@ -17,6 +18,9 @@ function Profile({ userInfo }) {
   const [follower, setFollower] = useState([]); //List of username whom follows current user.
   const isFollowing = follower.includes(loggedInUser);
   const [selected, setSelected] = useState(false);
+
+  const [favoriates, setFavoriates] = useState([]);
+
   //getFollows
   useEffect(() => {
     axios
@@ -25,6 +29,17 @@ function Profile({ userInfo }) {
         console.log(response.data);
         setFollowing(response.data.followings);
         setFollower(response.data.followers);
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  }, [username]);
+
+  useEffect(() => {
+    axios
+      .get(`${REACT_APP_API_URL}/getFavorites?username=${username}`)
+      .then((response) => {
+        setFavoriates(response.data.favorite_songs);
       })
       .catch((e) => {
         console.warn(e);
@@ -87,13 +102,12 @@ function Profile({ userInfo }) {
         <h2>Welcome, {loggedInUser}</h2>
       )}
       <Link to="/user/zkw">To test zkw</Link>
-
       {isSelf ? (
         <h3>Your are following:</h3>
       ) : (
         <h3>{username} are following:</h3>
       )}
-      {following ? (
+      {following.length !== 0 ? (
         following.map((aFollowing, i) => {
           return (
             <p>
@@ -105,8 +119,7 @@ function Profile({ userInfo }) {
         <p>No one</p>
       )}
       {isSelf ? <h3>Who follows you</h3> : <h3>Who follows {username}</h3>}
-
-      {follower ? (
+      {follower.length !== 0 ? (
         follower.map((aFollower, i) => {
           return (
             <p>
@@ -116,6 +129,23 @@ function Profile({ userInfo }) {
         })
       ) : (
         <p>No one</p>
+      )}
+
+      {isSelf ? <h2>Your Favoriate</h2> : <h2>{username} Favoriate</h2>}
+      {console.log(favoriates)}
+      {favoriates.length !== 0 ? (
+        favoriates.map((aSongID, i) => {
+          console.log(aSongID);
+          return (
+            <SongThumbnail
+              youtubeID={aSongID}
+              handlePlay={handlePlay}
+              userInfo={userInfo}
+            />
+          );
+        })
+      ) : (
+        <p>No Favoriate</p>
       )}
     </div>
   );

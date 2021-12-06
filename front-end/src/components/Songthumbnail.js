@@ -14,7 +14,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 const { REACT_APP_API_URL } = process.env;
 
-function SongThumbnail({ youtubeID, handlePlay }) {
+function SongThumbnail({ youtubeID, handlePlay, userInfo }) {
   const [songDetail, setSongDetail] = useState();
   const [songID, setSongID] = useState();
 
@@ -38,37 +38,20 @@ function SongThumbnail({ youtubeID, handlePlay }) {
     }
   }, [songID]);
 
-  return (
-    // <div className="square">
-    //   {songDetail ? (
-    //     <>
-    //       <h3>{songDetail.title}</h3>
-    //       <h4>{songDetail.artist}</h4>
-    //       <img
-    //         src={songDetail.thumbnails.default.url}
-    //         alt="the album cover"
-    //       ></img>
-    //       <p>
-    //         <Link to={"/song/" + songID}>To Song detail page</Link>
-    //       </p>
-    //       <p>
-    //         <Link to={"/activity/?urlSongID=" + songID}>
-    //           Share this Song to activity
-    //         </Link>
-    //       </p>
-    //       <button
-    //         onClick={() => {
-    //           handlePlay(songDetail.songID);
-    //         }}
-    //       >
-    //         Play
-    //       </button>
-    //     </>
-    //   ) : (
-    //     <></>
-    //   )}
-    // </div>
+  const handleAddFavoriate = () => {
+    axios
+      .get(
+        `${REACT_APP_API_URL}/addFavorites?username=${userInfo.username}&songID=${songID}`
+      )
+      .then((response) => {
+        console.log("add Favorites: ", response.data);
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  };
 
+  return (
     <>
       {songDetail ? (
         <Card sx={{ maxWidth: 345 }}>
@@ -87,14 +70,15 @@ function SongThumbnail({ youtubeID, handlePlay }) {
               onClick={() => {
                 handlePlay(songDetail.songID);
               }}
-              aria-label="expand"
+              aria-label="play"
             >
               <PlayArrowIcon />
             </IconButton>
 
             <IconButton
-              component={Link}
-              to="/profile"
+              onClick={() => {
+                handleAddFavoriate(songDetail.songID);
+              }}
               aria-label="add to favorites"
             >
               <FavoriteIcon />
