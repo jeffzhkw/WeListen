@@ -101,7 +101,9 @@ function App() {
 
           <Route
             path="/groups"
-            element={isLoggedIn ? <Groups /> : <NotAuthed />}
+            element={
+              isLoggedIn ? <Groups userInfo={userInfo} /> : <NotAuthed />
+            }
           ></Route>
 
           <Route
@@ -128,16 +130,6 @@ function App() {
           <Route path="/" element={<Start />}></Route>
         </Routes>
         <ControlBar currPlayingID={currPlayingID} />
-          {isLoggedIn ? (
-          <Chat userInfo={userInfo}></Chat>
-        ) : (
-          <div>Log In to chat</div>
-        )}
-	{isLoggedIn ? (
-          <LiveStream userInfo={userInfo}></LiveStream>
-        ) : (
-          <div>Log In to livestream</div>
-        )}
       </Router>
     </div>
   );

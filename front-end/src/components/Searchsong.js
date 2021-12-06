@@ -11,6 +11,7 @@ function SearchSong({ handlePlay }) {
   const [artist, setArtist] = useState();
   const [resSongID, setResSongID] = useState();
   const [loading, setLoading] = useState(false);
+  const [searchHistory, setSearchHistory] = useState({ his: [] });
 
   const handleSearch = (e) => {
     setLoading(true);

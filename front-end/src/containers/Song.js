@@ -62,9 +62,13 @@ function Song({ userInfo }) {
       <h1>Song</h1>
       <p>{songID}</p>
       <h2>Comments of current song</h2>
-      {songComments.map((aComment, i) => {
-        return <p>{aComment}</p>;
-      })}
+      {songComments ? (
+        songComments.map((aComment, i) => {
+          return <p>{aComment}</p>;
+        })
+      ) : (
+        <></>
+      )}
 
       <form onSubmit={handleAddComment}>
         <label htmlFor="comment">Write your comment</label>

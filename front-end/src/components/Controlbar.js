@@ -3,9 +3,6 @@ import AudioPlayer from "./Audioplayer";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-
 const { REACT_APP_API_URL } = process.env;
 
 function ControlBar({ currPlayingID }) {

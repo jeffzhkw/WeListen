@@ -49,6 +49,11 @@
   border: 1px solid black;
 }
 
+.groupsWrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
 /*mobile style*/
 @media (max-width: 600px) {
   .App {
