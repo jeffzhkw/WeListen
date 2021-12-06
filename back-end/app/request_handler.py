@@ -19,14 +19,15 @@ def handle_stream_request():
     artist = request.args.get('artist', '')
     print("reached flask", title, artist)
 
-    res = {"songID": search_youtube_url(title,artist)[0]['id']['videoId']
-           }
+    res = {"songID": search_youtube_url(title,artist)}
     return jsonify(res)
 
 @app.route('/getActivity', methods = ['GET'])
 def get_activity():
     username = request.args.get('username')
     following = fetch_follow(username)['followings']
+    print("get username: {}".format(username))
+    print(following)
     posts = {}
     for person in following:
         posts[person] = get_activities_oneuser(person)

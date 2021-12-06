@@ -9,6 +9,10 @@ class Song(db.Model):
     songID = db.Column(db.String(80) ,primary_key = True)
     songName = db.Column(db.String(80))
     songArtist = db.Column(db.String(80))
+    songThumbnails = db.Column(db.String(80))
+    songVidTitle = db.Column(db.String(80))
+    songChannelName = db.Column(db.String(80))
+
 
 
 class TimedComment(db.Model):
@@ -16,7 +20,7 @@ class TimedComment(db.Model):
     tcID = db.Column(db.Integer, primary_key = True)
     tcSong = db.Column(db.String(80))
     tcCreator = db.Column(db.String(80))
-    tcTimeStamp = db.Column(db.DateTime(timezone=False))
+    tcTimeStamp = db.Column(db.Integer)
     tcText = db.Column(db.String())
 
 class Follow(db.Model):
@@ -28,7 +32,7 @@ class Post(db.Model):
     __tablename__ = "Post"
     postID = db.Column(db.Integer, primary_key=True)
     postCreator = db.Column(db.String(80))
-    postDate = db.Column(db.DateTime(timezone=False))
+    postDate = db.Column(db.String(80))
     postSong = db.Column(db.String(80))
     postCaption = db.Column(db.String(80))
     # postPublic = db.Column(db.Integer) # post public or not

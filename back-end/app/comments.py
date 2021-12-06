@@ -19,16 +19,17 @@ def add_comment(user, song, ts, comments):
 
 def get_comment_of_song(songID):
     comment = TimedComment.query.filter_by(tcSong=songID).all()
-    all_comment = {}
+    all_comment = []
     for item in comment:
         one_comment = {
+            "tcID": item.tcID,
             "tcSong": item.tcSong,
             "tcCreator": item.tcCreator,
             "tcTimeStamp": item.tcTimeStamp,
             "tcText": item.tcText
         }
         print(type(one_comment["tcTimeStamp"]))
-        all_comment[item.tcID] = one_comment
+        all_comment.append(one_comment)
     print(all_comment)
     # print(comment[2].tcText)
-    return all_comment
+    return {"comments": all_comment}
