@@ -21,6 +21,7 @@ import Song from "./containers/Song";
 
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import { Auth } from "aws-amplify";
 import NotAuthed from "./components/NotAuthed";
 import axios from "@aws-amplify/storage/node_modules/axios";
 const { REACT_APP_API_URL } = process.env;
@@ -32,6 +33,18 @@ function App() {
 
   const handlePlay = useCallback((songID) => {
     setCurrPlayingID(songID);
+  }, []);
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((res) => {
+        console.log(res);
+        setIsLoggedIn(true);
+        setUserInfo(res);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
   }, []);
 
   useEffect(() => {

@@ -26,6 +26,18 @@ function Song({ userInfo }) {
       });
   }, [songID]);
 
+  useEffect(() => {
+    axios
+      .get(`${REACT_APP_API_URL}/getComment?songID=${songID}`)
+      .then((response) => {
+        console.log(response.data);
+        setSongComments(response.data.comment);
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  }, [songID]);
+
   //TODO: getComment, Display songComment of songID
 
   const handleAddComment = (e) => {
