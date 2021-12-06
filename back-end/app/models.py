@@ -37,5 +37,11 @@ class Post(db.Model):
     postCaption = db.Column(db.String(80))
     # postPublic = db.Column(db.Integer) # post public or not
 
+class Favorite(db.Model):
+    __tablename__ = "Favorite"
+    favUser = db.Column(db.String(80), primary_key=True)
+    favSong = db.Column(db.String(80), primary_key=True)
+
+
 
 db.create_all()
