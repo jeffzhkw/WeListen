@@ -53,11 +53,13 @@ function Activity({ userInfo }) {
       });
   }, []);
   return (
-    <div>
+    <div className="containerWrapper">
       <h1>Activity</h1>
       <h2>Share a Song</h2>
       <form onSubmit={handlePost}>
-        <label htmlFor="content">Post your thoughts!!!</label>
+        <label htmlFor="content">
+          Post your thoughts for song {urlSongID}!!!
+        </label>
         <input
           type="text"
           name="content"

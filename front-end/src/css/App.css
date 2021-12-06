@@ -1,10 +1,10 @@
 * {
   box-sizing: border-box;
 }
-/* .App {
+.App {
   display: flex;
   flex-direction: column;
-} */
+}
 
 .Content {
   max-width: 1200px;
@@ -24,6 +24,9 @@
   flex-direction: row;
   border: 1px solid black;
   justify-self: flex-end;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .navBar {
@@ -35,9 +38,20 @@
   margin: auto 10px;
 }
 
+.userDetail {
+  display: flex;
+  flex-direction: row;
+}
+
+.containerWrapper {
+  min-width: 1280px;
+  margin: auto auto;
+  border: 1px solid black;
+}
+
 /*mobile style*/
 @media (max-width: 600px) {
   .App {
-    background-color: red;
+    background-color: grey;
   }
 }

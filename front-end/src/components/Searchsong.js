@@ -1,14 +1,19 @@
 import { React, useState } from "react";
 import SongThumbnail from "../components/Songthumbnail";
 import axios from "axios";
+import LoadingButton from "@mui/lab/LoadingButton";
+import TextField from "@mui/material/TextField";
+import SendIcon from "@mui/icons-material/Send";
 const { REACT_APP_API_URL } = process.env;
 
 function SearchSong({ handlePlay }) {
   const [title, setTitle] = useState();
   const [artist, setArtist] = useState();
   const [resSongID, setResSongID] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = (e) => {
+    setLoading(true);
     e.preventDefault();
     if (title && artist) {
       axios
@@ -16,9 +21,11 @@ function SearchSong({ handlePlay }) {
         .then((response) => {
           console.log("Handled search", response);
           setResSongID(response.data.songID);
+          setLoading(false);
         })
         .catch((error) => {
           console.warn(error);
+          setLoading(false);
         });
     }
   };
@@ -27,9 +34,10 @@ function SearchSong({ handlePlay }) {
     <div className="songWrapper">
       <form onSubmit={handleSearch}>
         <h1>Search</h1>
-
-        <label htmlFor="title">Song Name: </label>
-        <input
+        <TextField
+          fullWidth
+          label="Song Name: "
+          id="fullWidth"
           type="text"
           name="title"
           value={title}
@@ -37,10 +45,11 @@ function SearchSong({ handlePlay }) {
             setTitle(e.target.value);
           }}
           required
-        ></input>
-
-        <label htmlFor="artist">Artist: </label>
-        <input
+        />
+        <TextField
+          fullWidth
+          label="Artist"
+          id="fullWidth"
           type="text"
           name="artist"
           value={artist}
@@ -48,9 +57,17 @@ function SearchSong({ handlePlay }) {
             setArtist(e.target.value);
           }}
           required
-        ></input>
+        />
 
-        <button type="submit">Submit</button>
+        <LoadingButton
+          type="submit"
+          endIcon={<SendIcon />}
+          loading={loading}
+          loadingPosition="end"
+          variant="contained"
+        >
+          Search
+        </LoadingButton>
       </form>
 
       {/* TODO: Generate a list of result from Flask Query */}

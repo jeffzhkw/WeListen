@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Start() {
   return (
-    <div>
+    <div className="containerWrapper">
       <p>
         Hello, please login or sign up
         <Link to="/login">Here</Link>

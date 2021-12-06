@@ -52,7 +52,7 @@ function App() {
       axios
         .post(`${REACT_APP_API_URL}/newUser`, { username: userInfo.username })
         .then((response) => {
-          console.log(response);
+          console.log("/newUser", response);
         })
         .catch((error) => {
           console.warn(error);

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+
+import CheckIcon from "@mui/icons-material/Check";
+import ToggleButton from "@mui/material/ToggleButton";
+
 const { REACT_APP_API_URL } = process.env;
 
 function Profile({ userInfo }) {
   let { username } = useParams();
 
   const loggedInUser = userInfo.username;
-
   const isSelf = username === loggedInUser;
 
   const [following, setFollowing] = useState([]); //List of username that current user is follows
   const [follower, setFollower] = useState([]); //List of username whom follows current user.
   const isFollowing = follower.includes(loggedInUser);
+  const [selected, setSelected] = useState(false);
   //getFollows
   useEffect(() => {
     axios
@@ -55,12 +59,21 @@ function Profile({ userInfo }) {
 
   //TODO: Add follow button. Check cannot follow self.
   return (
-    <div>
+    <div className="containerWrapper">
       <h1>Profile</h1>
-      {/*TODO: Check if current display user is myself */}
       {!isSelf ? (
         <>
           <h2>Profile of {username}</h2>
+          <ToggleButton
+            value="check"
+            selected={selected}
+            onChange={() => {
+              setSelected(!selected);
+            }}
+          >
+            Test UI:
+            {selected ? <p>Stop Follow</p> : <p>Follow this guy: {username}</p>}
+          </ToggleButton>
           {isFollowing ? (
             <>
               <p>You are following {username}</p>

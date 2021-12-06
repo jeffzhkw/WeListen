@@ -19,7 +19,6 @@ function Song({ userInfo }) {
       .then((response) => {
         console.log(response.data);
         setTotalSongTime(response.data.duration);
-        setSongComments(response.data.comment);
       })
       .catch((error) => {
         console.warn(error);
@@ -31,7 +30,7 @@ function Song({ userInfo }) {
       .get(`${REACT_APP_API_URL}/getComment?songID=${songID}`)
       .then((response) => {
         console.log(response.data);
-        setSongComments(response.data.comment);
+        setSongComments(response.data.comments);
       })
       .catch((error) => {
         console.warn(error);
@@ -59,7 +58,7 @@ function Song({ userInfo }) {
   };
 
   return (
-    <div className="songWrapper">
+    <div className="containerWrapper">
       <h1>Song</h1>
       <p>{songID}</p>
       <h2>Comments of current song</h2>
