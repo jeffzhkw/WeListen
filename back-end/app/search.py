@@ -22,7 +22,6 @@ def search_youtube_url(title, artist):
     # search for the top result using songname and author
     # https://developers.google.com/youtube/v3/docs/search#resource
     search_response = youtube.search().list(q = title+" "+artist, part='id,snippet',maxResults=1).execute()
-    print(search_response)
     songID = search_response['items'][0]['id']['videoId']
     songInDB = Song.query.filter_by(songID=songID).first()
     if not songInDB:
@@ -41,8 +40,6 @@ def formulate_response(songID):
 
     # use search function
     search_response = search_youtube_url(songID, "")
-    print("here")
-    print(search_response)
 
     #extract information
     songID = search_response[0]['id']['videoId']
