@@ -8,23 +8,14 @@ function SearchSong({ handlePlay }) {
   const [artist, setArtist] = useState();
   const [resSongID, setResSongID] = useState();
 
-  const [resTitle, setResTitle] = useState();
-  const [resArtist, setResArtist] = useState();
-  const [audioStream, setAudioStream] = useState();
-
-  const URL = `${REACT_APP_API_URL}/search?title=${title}&artist=${artist}`;
-
   const handleSearch = (e) => {
-    console.log("Handled search");
     e.preventDefault();
     if (title && artist) {
       axios
-        .get(URL)
+        .get(`${REACT_APP_API_URL}/search?title=${title}&artist=${artist}`)
         .then((response) => {
+          console.log("Handled search", response);
           setResSongID(response.data.songID);
-          setAudioStream(response.data.audio_stream);
-          setResArtist(response.data.video_title);
-          setResTitle(response.data.artist);
         })
         .catch((error) => {
           console.warn(error);
@@ -65,15 +56,7 @@ function SearchSong({ handlePlay }) {
       {/* TODO: Generate a list of result from Flask Query */}
       <div>
         {/* TODO: Switch link to use songID */}
-        {/* <SongThumbnail songID={resSongID} handlePlay={handlePlay} /> */}
-        <div>
-          <SongThumbnail
-            title={resTitle}
-            artist={resArtist}
-            stream={audioStream}
-            handlePlay={handlePlay}
-          />
-        </div>
+        <SongThumbnail youtubeID={resSongID} handlePlay={handlePlay} />
       </div>
     </div>
   );

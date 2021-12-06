@@ -1,13 +1,19 @@
 import axios from "@aws-amplify/storage/node_modules/axios";
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const { REACT_APP_API_URL } = process.env;
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 function Activity({ userInfo }) {
   //TODO: Dynamic Web Final Project
 
-  const { urlSongID } = useParams();
+  let query = useQuery();
+  const urlSongID = query.get("urlSongID");
+
   /* TODO: Share songID, content, username */
   const username = userInfo.username;
   const [content, setContent] = useState();

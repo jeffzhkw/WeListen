@@ -40,7 +40,18 @@ function Profile({ userInfo }) {
         console.log(err);
       });
   };
-  const handleRemove = () => {};
+  const handleRemove = () => {
+    axios
+      .get(
+        `${REACT_APP_API_URL}/unfollow?username=${loggedInUser}&other=${username}`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   //TODO: Add follow button. Check cannot follow self.
   return (

@@ -10,14 +10,16 @@ function Song({ userInfo }) {
   const [songTime, setSongTime] = useState();
 
   const [totalSongTime, setTotalSongTime] = useState();
-  const [songComment, setSongComment] = useState([]);
+  const [songComments, setSongComments] = useState([]);
 
   //youtube_song_detail.
   useEffect(() => {
     axios
       .get(`${REACT_APP_API_URL}/youtubeDetail?songID=${songID}`)
       .then((response) => {
+        console.log(response.data);
         setTotalSongTime(response.data.duration);
+        setSongComments(response.data.comment);
       })
       .catch((error) => {
         console.warn(error);
@@ -25,8 +27,6 @@ function Song({ userInfo }) {
   }, [songID]);
 
   //TODO: getComment, Display songComment of songID
-  const URL = `${REACT_APP_API_URL}/getComment?songID=${songID}`;
-  useEffect((songID) => {}, [songID]);
 
   const handleAddComment = (e) => {
     e.preventDefault();
@@ -51,9 +51,9 @@ function Song({ userInfo }) {
       <h1>Song</h1>
       <p>{songID}</p>
       <h2>Comments of current song</h2>
-      {/* {songComment.map((aComment, i)=>{
-        return(<p>)
-      })} */}
+      {songComments.map((aComment, i) => {
+        return <p>{aComment}</p>;
+      })}
 
       <form onSubmit={handleAddComment}>
         <label htmlFor="comment">Write your comment</label>

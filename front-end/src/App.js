@@ -26,16 +26,12 @@ import axios from "@aws-amplify/storage/node_modules/axios";
 const { REACT_APP_API_URL } = process.env;
 
 function App() {
-  const [currPlaying, setCurrPlaying] = useState();
+  const [currPlayingID, setCurrPlayingID] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
-  const handlePlay = useCallback((title, artist, stream) => {
-    setCurrPlaying({
-      currTitle: title,
-      currArtist: artist,
-      currStream: stream,
-    });
+  const handlePlay = useCallback((songID) => {
+    setCurrPlayingID(songID);
   }, []);
 
   useEffect(() => {
@@ -118,7 +114,7 @@ function App() {
 
           <Route path="/" element={<Start />}></Route>
         </Routes>
-        <ControlBar currPlaying={currPlaying} />
+        <ControlBar currPlayingID={currPlayingID} />
       </Router>
     </div>
   );
