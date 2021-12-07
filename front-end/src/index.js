@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
+import 'antd/dist/antd.css';
 Amplify.configure(awsExports);
 
 ReactDOM.render(

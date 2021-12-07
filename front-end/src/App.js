@@ -86,7 +86,11 @@ function App() {
             <Route
               path=":username"
               element={
-                isLoggedIn ? <Profile userInfo={userInfo} /> : <NotAuthed />
+                isLoggedIn ? (
+                  <Profile userInfo={userInfo} handlePlay={handlePlay} />
+                ) : (
+                  <NotAuthed />
+                )
               }
             />
             <Route path="" element={<NotFound />} />
@@ -95,19 +99,29 @@ function App() {
           <Route
             path="/activity"
             element={
-              isLoggedIn ? <Activity userInfo={userInfo} /> : <NotAuthed />
+              isLoggedIn ? (
+                <Activity userInfo={userInfo} handlePlay={handlePlay} />
+              ) : (
+                <NotAuthed />
+              )
             }
           ></Route>
 
           <Route
             path="/groups"
-            element={isLoggedIn ? <Groups /> : <NotAuthed />}
+            element={
+              isLoggedIn ? <Groups userInfo={userInfo} /> : <NotAuthed />
+            }
           ></Route>
 
           <Route
             path="/home"
             element={
-              isLoggedIn ? <Home handlePlay={handlePlay} /> : <NotAuthed />
+              isLoggedIn ? (
+                <Home handlePlay={handlePlay} userInfo={userInfo} />
+              ) : (
+                <NotAuthed />
+              )
             }
           ></Route>
           {/* TODO: Resolve second render. */}
@@ -128,16 +142,6 @@ function App() {
           <Route path="/" element={<Start />}></Route>
         </Routes>
         <ControlBar currPlayingID={currPlayingID} />
-          {isLoggedIn ? (
-          <Chat userInfo={userInfo}></Chat>
-        ) : (
-          <div>Log In to chat</div>
-        )}
-	{isLoggedIn ? (
-          <LiveStream userInfo={userInfo}></LiveStream>
-        ) : (
-          <div>Log In to livestream</div>
-        )}
       </Router>
     </div>
   );

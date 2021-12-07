@@ -1,6 +1,8 @@
 import axios from "@aws-amplify/storage/node_modules/axios";
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import AComment from "../components/AComment";
+
 const { REACT_APP_API_URL } = process.env;
 
 function Song({ userInfo }) {
@@ -29,7 +31,7 @@ function Song({ userInfo }) {
     axios
       .get(`${REACT_APP_API_URL}/getComment?songID=${songID}`)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.comments);
         setSongComments(response.data.comments);
       })
       .catch((error) => {
@@ -62,10 +64,20 @@ function Song({ userInfo }) {
       <h1>Song</h1>
       <p>{songID}</p>
       <h2>Comments of current song</h2>
-      {songComments.map((aComment, i) => {
-        return <p>{aComment}</p>;
-      })}
-
+      {songComments !== 0 ? (
+        songComments.map((aComment, i) => {
+          return (
+            <AComment
+              tcCreator={aComment.tcCreator}
+              tcSong={aComment.tcSong}
+              tcText={aComment.tcText}
+              tcTimeStamp={aComment.tcTimeStamp}
+            />
+          );
+        })
+      ) : (
+        <></>
+      )}
       <form onSubmit={handleAddComment}>
         <label htmlFor="comment">Write your comment</label>
         <input

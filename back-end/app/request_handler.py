@@ -9,6 +9,7 @@ from app.follow import add_follow, fetch_follow, remove_follow
 from app.user import add_new_user
 from app.comments import add_comment, get_comment_of_song
 from app.activity import post_one_activity, get_activities_oneuser
+from app.favorites import add_favorite, remove_favorite, get_favorites
 
 
 
@@ -18,18 +19,28 @@ def handle_stream_request():
     artist = request.args.get('artist', '')
     print("reached flask", title, artist)
 
-    res = {"songID": search_youtube_url(title,artist)[0]['id']['videoId']
-           }
+    res = {"songID": search_youtube_url(title,artist)}
     return jsonify(res)
 
 @app.route('/getActivity', methods = ['GET'])
 def get_activity():
     username = request.args.get('username')
     following = fetch_follow(username)['followings']
-    posts = {}
+    print("get username: {}".format(username))
+    print(following)
+    posts = []
     for person in following:
-        posts[person] = get_activities_oneuser(person)
-    return jsonify(posts)
+        aPost = get_activities_oneuser(person)
+        for item in aPost:
+            post = {
+                "postCreator": item.postCreator,
+                "postDate": item.postDate,
+                "postSong": item.postSong,
+                "postCaption": item.postCaption
+            }
+            posts.append(post)
+    print(posts)
+    return jsonify({"posts": posts})
 
 
 
@@ -104,6 +115,22 @@ def get_youtube_detail():
     youtubeURL = request.args.get('songID')
     return jsonify(formulate_response(youtubeURL))
 
+@app.route("/addFavorites", methods=['GET'])
+def handle_new_favorite():
+    user = request.args.get('username')
+    song = request.args.get('songID')
+    return jsonify(add_favorite(user, song))
+
+@app.route("/removeFavorites", methods=['GET'])
+def handle_remove_favorites():
+    user = request.args.get('username')
+    song = request.args.get('songID')
+    return jsonify(remove_favorite(user, song))
+
+@app.route("/getFavorites", methods=['GET'])
+def display_favorites():
+    user = request.args.get('username')
+    return jsonify(get_favorites(user))
 
 
 # starting point

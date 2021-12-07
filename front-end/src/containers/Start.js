@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 function Start() {
   return (
     <div className="containerWrapper">
-      <p>
-        Hello, please login or sign up
-        <Link to="/login">Here</Link>
+      <div className="libig">
+        <h2>Hello, please login or sign up</h2>
+        <Link to="/login" className="bigclass">
+        Here
+        </Link>
         {/* <a href={REACT_APP_LOGIN_URI}>Using AWS Cognito</a> */}
         {/* <a href="/welcome">Using AWS Cognito</a> */}
-      </p>
-      <p>
-        <span>Assuming success: </span>
-        <a href="/home">To Home</a>
-      </p>
+      </div>
+      <div className="libig">
+        <h2>Assuming success: </h2>
+        <Link to="/home" className="bigclass">
+          To Home
+        </Link>
+      </div>
     </div>
   );
 }
