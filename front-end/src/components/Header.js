@@ -62,7 +62,7 @@ function Header({ isLoggedIn, userInfo, setIsLoggedIn, setUserInfo }) {
     //     </>
     //   )}
     // </div>
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position: "fixed", width: "100%" }}>
       <AppBar position="static">
         <Toolbar variant="dense">
           <Typography variant="h4" color="inherit" component="div">

@@ -33,9 +33,10 @@ function SearchSong({ handlePlay, userInfo }) {
 
   return (
     <div className="songWrapper">
-      <form onSubmit={handleSearch}>
+      <form onSubmit={handleSearch} className="searchForm">
         <h1>Search</h1>
         <TextField
+          sx={{ margin: "20px auto" }}
           fullWidth
           label="Song Name: "
           id="fullWidth"
@@ -48,6 +49,7 @@ function SearchSong({ handlePlay, userInfo }) {
           required
         />
         <TextField
+          sx={{ margin: "20px auto" }}
           fullWidth
           label="Artist"
           id="fullWidth"
@@ -61,6 +63,7 @@ function SearchSong({ handlePlay, userInfo }) {
         />
 
         <LoadingButton
+          sx={{ alignItems: "flex-end" }}
           type="submit"
           endIcon={<SendIcon />}
           loading={loading}
@@ -71,9 +74,7 @@ function SearchSong({ handlePlay, userInfo }) {
         </LoadingButton>
       </form>
 
-      {/* TODO: Generate a list of result from Flask Query */}
-      <div>
-        {/* TODO: Switch link to use songID */}
+      <div className="searchResult">
         {resSongID ? (
           <SongThumbnail
             youtubeID={resSongID}

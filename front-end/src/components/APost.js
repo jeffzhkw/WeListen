@@ -16,11 +16,6 @@ export default function APost({
   console.log(postCreator, postCaption, postDate, postSong);
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt="cover"
-        image="/static/images/cards/contemplative-reptile.jpg"
-      />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           {postCreator}

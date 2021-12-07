@@ -20,13 +20,6 @@
 }
 
 .controlBarWrapper {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid black;
-  justify-self: flex-end;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
 
 .navBar {
@@ -41,6 +34,22 @@
 .userDetail {
   display: flex;
   flex-direction: row;
+}
+
+.songWrapper {
+  padding: 30px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchResult {
+  align-self: center;
+  margin: 20px auto;
 }
 
 .containerWrapper {
