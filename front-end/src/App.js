@@ -99,7 +99,11 @@ function App() {
           <Route
             path="/activity"
             element={
-              isLoggedIn ? <Activity userInfo={userInfo} /> : <NotAuthed />
+              isLoggedIn ? (
+                <Activity userInfo={userInfo} handlePlay={handlePlay} />
+              ) : (
+                <NotAuthed />
+              )
             }
           ></Route>
 

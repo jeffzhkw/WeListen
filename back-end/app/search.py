@@ -61,7 +61,7 @@ def formulate_response(songID):
 
     channelName = song.songArtist
     songTitle = song.songVidTitle
-    thumbnails = song.thumbnails
+    thumbnails = song.songThumbnails
 
     #query in database using songID
 

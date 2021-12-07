@@ -17,6 +17,7 @@ const { REACT_APP_API_URL } = process.env;
 function SongThumbnail({ youtubeID, handlePlay, userInfo }) {
   const [songDetail, setSongDetail] = useState();
   const [songID, setSongID] = useState();
+  console.log(youtubeID);
 
   useEffect(() => {
     setSongID(youtubeID);

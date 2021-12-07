@@ -1,6 +1,7 @@
 import axios from "@aws-amplify/storage/node_modules/axios";
 import { React, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import APost from "../components/APost";
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -8,7 +9,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-function Activity({ userInfo }) {
+function Activity({ userInfo, handlePlay }) {
   //TODO: Dynamic Web Final Project
 
   let query = useQuery();
@@ -18,6 +19,8 @@ function Activity({ userInfo }) {
 
   const [content, setContent] = useState();
   const [songID, setSongID] = useState();
+  const [postList, setPostList] = useState([]);
+  /* TODO: get Activity of username */
 
   useEffect(() => {
     setSongID(urlSongID);
@@ -39,15 +42,13 @@ function Activity({ userInfo }) {
       });
   };
 
-  /* TODO: get Activity of username */
-  const [postList, setPostList] = useState([]);
-
   useEffect(() => {
     if (userInfo) {
       axios
         .get(`${REACT_APP_API_URL}/getActivity?username=${userInfo.username}`)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
+          setPostList(res.data.posts);
         })
         .catch((err) => {
           console.log(err);
@@ -74,9 +75,23 @@ function Activity({ userInfo }) {
         <button type="submit">Post</button>
       </form>
       <h2>See what your friends post</h2>
-      {postList.map((aPost, i) => {
-        return aPost;
-      })}
+      {postList.length !== 0 ? (
+        postList.map((aPost, i) => {
+          console.log(aPost);
+          return (
+            <APost
+              postCreator={aPost.postCreator}
+              postCaption={aPost.postCaption}
+              postDate={aPost.postDate}
+              postSong={aPost.postSong}
+              handlePlay={handlePlay}
+              userInfo={userInfo}
+            />
+          );
+        })
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
