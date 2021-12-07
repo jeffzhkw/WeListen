@@ -28,10 +28,19 @@ def get_activity():
     following = fetch_follow(username)['followings']
     print("get username: {}".format(username))
     print(following)
-    posts = {}
+    posts = []
     for person in following:
-        posts[person] = get_activities_oneuser(person)
-    return jsonify(posts)
+        aPost = get_activities_oneuser(person)
+        for item in aPost:
+            post = {
+                "postCreator": item.postCreator,
+                "postDate": item.postDate,
+                "postSong": item.postSong,
+                "postCaption": item.postCaption
+            }
+            posts.append(post)
+    print(posts)
+    return jsonify({"posts": posts})
 
 
 
