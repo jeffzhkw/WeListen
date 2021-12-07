@@ -17,6 +17,14 @@ body,
   flex-direction: column;
 }
 
+.welcomeTitle {
+  font-size: 64px;
+}
+
+.welcomeTitle > h1 {
+  margin: 20px auto;
+}
+
 .Content {
   margin: auto;
   border: 1px solid black;
@@ -43,6 +51,12 @@ body,
   flex-direction: row;
 }
 
+.controlBarWrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 .songWrapper {
   padding: 30px 30px;
   display: flex;
@@ -61,7 +75,17 @@ body,
 
 .containerWrapper {
   min-width: 1280px;
-  margin: auto auto;
+  margin: 75px auto;
+}
+
+.profileFollowList {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px auto;
+}
+
+.favoriteWrapper {
+  display: flex;
 }
 
 .groupsWrapper {

@@ -30,63 +30,49 @@ function ControlBar({ currPlayingID }) {
 
   return (
     <footer className="controlBarWrapper">
-      {/* {songDetail ? (
-        <>
-          <p>{songDetail.video_title}</p>
-          <p>{songDetail.artist}</p>
-          <AudioPlayer audioStream={songDetail.audio_stream} />{" "}
-          <IconButton
-            component={Link}
-            to={"/activity/?urlSongID=" + songDetail.songID}
-            aria-label="share"
-          >
-            <ShareIcon />
-          </IconButton>
-          <IconButton
-            component={Link}
-            to={"/song/" + songDetail.songID}
-            aria-label="expand"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </>
-      ) : (
-        <></>
-      )} */}
+      <>
+        {songDetail ? (
+          <>
+            <IconButton
+              component={Link}
+              to={"/activity/?urlSongID=" + songDetail.songID}
+              aria-label="share"
+            >
+              <ShareIcon />
+            </IconButton>
+            <IconButton
+              component={Link}
+              to={"/song/" + songDetail.songID}
+              aria-label="expand"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </>
+        ) : (
+          <></>
+        )}
+      </>
       {songDetail ? (
-        <>
-          <ReactJkMusicPlayer
-            audioLists={[
-              {
-                name: songDetail.video_title,
-                cover: songDetail.thumbnails.default.url,
-                musicSrc: songDetail.audio_stream,
-                singer: songDetail.artist,
-                duration: songDetail.duration,
-              },
-            ]}
-            defaultPosition={{ bottom: "0" }}
-            mode="full"
-          />
-          <IconButton
-            component={Link}
-            to={"/activity/?urlSongID=" + songDetail.songID}
-            aria-label="share"
-          >
-            <ShareIcon />
-          </IconButton>
-          <IconButton
-            component={Link}
-            to={"/song/" + songDetail.songID}
-            aria-label="expand"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </>
+        <ReactJkMusicPlayer
+          audioLists={[
+            {
+              name: songDetail.video_title,
+              cover: songDetail.thumbnails.default.url,
+              musicSrc: songDetail.audio_stream,
+              singer: songDetail.artist,
+              duration: songDetail.duration,
+            },
+          ]}
+          defaultPosition={{ bottom: "0", right: "0" }}
+          mode="full"
+        />
       ) : (
-        <ReactJkMusicPlayer defaultPosition={{ bottom: "0" }} mode="full" />
+        // <ReactJkMusicPlayer
+        //   defaultPosition={{ bottom: "0", right: "0" }}
+        //   mode="full"
+        // />
+        <></>
       )}
-      ,
     </footer>
   );
 }

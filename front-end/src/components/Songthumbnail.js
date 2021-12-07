@@ -55,10 +55,10 @@ function SongThumbnail({ youtubeID, handlePlay, userInfo }) {
   return (
     <>
       {songDetail ? (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, margin: "20px 20px" }}>
           <CardHeader
-            title={songDetail.video_title}
-            subheader={songDetail.artist}
+            title={decodeURIComponent(songDetail.video_title)}
+            subheader={decodeURIComponent(songDetail.artist)}
           />
           <CardMedia
             component="img"

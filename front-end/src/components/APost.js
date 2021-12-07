@@ -15,7 +15,15 @@ export default function APost({
 }) {
   console.log(postCreator, postCaption, postDate, postSong);
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{
+        maxWidth: 800,
+        display: "flex",
+        justifyContent: "space-between",
+        width: "80%",
+        margin: "20px auto",
+      }}
+    >
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           {postCreator}

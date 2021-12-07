@@ -79,7 +79,7 @@ function Profile({ userInfo, handlePlay }) {
       {!isSelf ? (
         <>
           <h2>Profile of {username}</h2>
-          <ToggleButton
+          {/* <ToggleButton
             value="check"
             selected={selected}
             onChange={() => {
@@ -88,7 +88,7 @@ function Profile({ userInfo, handlePlay }) {
           >
             Test UI:
             {selected ? <p>Stop Follow</p> : <p>Follow this guy: {username}</p>}
-          </ToggleButton>
+          </ToggleButton> */}
           {isFollowing ? (
             <>
               <p>You are following {username}</p>
@@ -101,52 +101,60 @@ function Profile({ userInfo, handlePlay }) {
       ) : (
         <h2>Welcome, {loggedInUser}</h2>
       )}
-      <Link to="/user/zkw">To test zkw</Link>
-      {isSelf ? (
-        <h3>Your are following:</h3>
-      ) : (
-        <h3>{username} are following:</h3>
-      )}
-      {following.length !== 0 ? (
-        following.map((aFollowing, i) => {
-          return (
-            <p>
-              <Link to={"/user/" + aFollowing}>{aFollowing}</Link>
-            </p>
-          );
-        })
-      ) : (
-        <p>No one</p>
-      )}
-      {isSelf ? <h3>Who follows you</h3> : <h3>Who follows {username}</h3>}
-      {follower.length !== 0 ? (
-        follower.map((aFollower, i) => {
-          return (
-            <p>
-              <Link to={"/user/" + aFollower}>{aFollower}</Link>
-            </p>
-          );
-        })
-      ) : (
-        <p>No one</p>
-      )}
+      {/* <Link to="/user/zkw">To test zkw</Link> */}
+      <div className="profileFollowList">
+        <div className="followingWrapper">
+          {isSelf ? (
+            <h3>Your are following:</h3>
+          ) : (
+            <h3>{username} are following:</h3>
+          )}
+
+          {following.length !== 0 ? (
+            following.map((aFollowing, i) => {
+              return (
+                <p>
+                  <Link to={"/user/" + aFollowing}>{aFollowing}</Link>
+                </p>
+              );
+            })
+          ) : (
+            <p>No one</p>
+          )}
+        </div>
+        <div className="followerWrapper">
+          {isSelf ? <h3>Who follows you</h3> : <h3>Who follows {username}</h3>}
+          {follower.length !== 0 ? (
+            follower.map((aFollower, i) => {
+              return (
+                <p>
+                  <Link to={"/user/" + aFollower}>{aFollower}</Link>
+                </p>
+              );
+            })
+          ) : (
+            <p>No one</p>
+          )}
+        </div>
+      </div>
 
       {isSelf ? <h2>Your Favoriate</h2> : <h2>{username} Favoriate</h2>}
-      {console.log(favoriates)}
-      {favoriates.length !== 0 ? (
-        favoriates.map((aSongID, i) => {
-          console.log(aSongID);
-          return (
-            <SongThumbnail
-              youtubeID={aSongID}
-              handlePlay={handlePlay}
-              userInfo={userInfo}
-            />
-          );
-        })
-      ) : (
-        <p>No Favoriate</p>
-      )}
+      <div className="favoriteWrapper">
+        {favoriates.length !== 0 ? (
+          favoriates.map((aSongID, i) => {
+            console.log(aSongID);
+            return (
+              <SongThumbnail
+                youtubeID={aSongID}
+                handlePlay={handlePlay}
+                userInfo={userInfo}
+              />
+            );
+          })
+        ) : (
+          <p>No Favoriate</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -86,7 +86,7 @@ function Header({ isLoggedIn, userInfo, setIsLoggedIn, setUserInfo }) {
             <Button
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
-              to="/Activity"
+              to="/activity"
             >
               Activity
             </Button>

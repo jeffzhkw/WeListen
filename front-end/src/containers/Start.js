@@ -5,17 +5,17 @@ function Start() {
   return (
     <div className="containerWrapper">
       <div className="libig">
-        <h2>Hello, please login or sign up</h2>
-        <Link to="/login" className="bigclass">
-        Here
-        </Link>
+        <div className="welcomeTitle">
+          <h1>Music, </h1>
+          <h1>now with your friends.</h1>
+        </div>
+
         {/* <a href={REACT_APP_LOGIN_URI}>Using AWS Cognito</a> */}
         {/* <a href="/welcome">Using AWS Cognito</a> */}
       </div>
       <div className="libig">
-        <h2>Assuming success: </h2>
-        <Link to="/home" className="bigclass">
-          To Home
+        <Link to="/login" className="bigclass">
+          Get Start
         </Link>
       </div>
     </div>
