@@ -3,8 +3,12 @@ import AudioPlayer from "./Audioplayer";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import IconButton from "@mui/material/IconButton";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+import ReactJkMusicPlayer from "react-jinke-music-player";
+import "react-jinke-music-player/assets/index.css";
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -27,24 +31,55 @@ function ControlBar({ currPlayingID }) {
 
   return (
     <footer className="controlBarWrapper">
-      <p>Playing: </p>
-      {songDetail ? (
+      {/* {songDetail ? (
         <>
-          <h4>{songDetail.video_title}</h4>
-          <h4>{songDetail.artist}</h4>
+          <p>{songDetail.video_title}</p>
+          <p>{songDetail.artist}</p>
           <AudioPlayer audioStream={songDetail.audio_stream} />{" "}
-          <p>
-            <Link to={"/song/" + songDetail.songID}>To Song detail page</Link>
-          </p>
-          <p>
-            <Link to={"/activity/?urlSongID=" + songDetail.songID}>
-              Share this Song to activity
-            </Link>
-          </p>
+          <IconButton
+            component={Link}
+            to={"/activity/?urlSongID=" + songDetail.songID}
+            aria-label="share"
+          >
+            <ShareIcon />
+          </IconButton>
+          <IconButton
+            component={Link}
+            to={"/song/" + songDetail.songID}
+            aria-label="expand"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
         </>
       ) : (
         <></>
+      )} */}
+      {songDetail ? (
+        <ReactJkMusicPlayer
+          audioLists={[
+            {
+              name: songDetail.video_title,
+              cover: songDetail.thumbnails.default.url,
+              musicSrc: songDetail.audio_stream,
+              singer: songDetail.artist,
+              duration: songDetail.duration,
+            },
+          ]}
+          defaultPosition={{ bottom: "0" }}
+          mode="full"
+        />
+      ) : (
+        <ReactJkMusicPlayer
+          audioLists={[
+            {
+              name: "Not Playing",
+            },
+          ]}
+          defaultPosition={{ bottom: "0" }}
+          mode="full"
+        />
       )}
+      ,
     </footer>
   );
 }

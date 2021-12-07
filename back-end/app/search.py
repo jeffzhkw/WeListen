@@ -1,4 +1,5 @@
 from googleapiclient.discovery import build
+import json
 import pafy
 
 from API_KEYS import *
@@ -8,8 +9,9 @@ YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 
 
-def insert_new_song(id, title, artist,):
-    newSong = Song(songID=id, songName=title,songArtist=artist)
+def insert_new_song(id, user_title, user_artist, thumbnails, video_title, video_channel):
+    newSong = Song(songID=id, songName=user_title,songArtist=user_artist,
+                   songThumbnails=thumbnails,songVidTitle=video_title, songChannelName=video_channel)
     db.session.add(newSong)
     db.session.commit()
 
@@ -21,14 +23,24 @@ def search_youtube_url(title, artist):
 
     # search for the top result using songname and author
     # https://developers.google.com/youtube/v3/docs/search#resource
+    songInDB = Song.query.filter_by(songName=title,songArtist=artist).first()
+    if songInDB:
+        songID = songInDB.songID
+        return songID
+    print("search YOUTUBE using quota")
     search_response = youtube.search().list(q = title+" "+artist, part='id,snippet',maxResults=1).execute()
     songID = search_response['items'][0]['id']['videoId']
-    songInDB = Song.query.filter_by(songID=songID).first()
+    songInDB = Song.query.filter_by(songID = songID).first()
     if not songInDB:
-        insert_new_song(songID,title,artist)
-    # videoId = search_response['items'][0]['id']['videoId']
+        thumbnails = json.dumps(search_response['items'][0]['snippet']['thumbnails'])
+        video_title = search_response['items'][0]['snippet']['title']
+        video_channel = search_response['items'][0]['snippet']['channelTitle']
+        print(type(thumbnails))
+        print("insert {} to db".format(songID))
+        insert_new_song(songID,title,artist, thumbnails,video_title,video_channel)
+
     #print(search_response)
-    return search_response['items']
+    return songID
 
 
 
@@ -38,32 +50,31 @@ def search_youtube_url(title, artist):
 def formulate_response(songID):
     response_dict = {}
 
+    song = Song.query.filter_by(songID=songID).first()
+
     # use search function
-    search_response = search_youtube_url(songID, "")
+    # search_response = search_youtube_url(songID, "")
 
     #extract information
-    songID = search_response[0]['id']['videoId']
+    songID = song.songID
     print(songID)
-    url = "https://www.youtube.com/watch?v="+songID
-    channelName = search_response[0]['snippet']['channelTitle']
-    songTitle = search_response[0]['snippet']['title']
-    thumbnails = search_response[0]['snippet']['thumbnails']
+
+    channelName = song.songArtist
+    songTitle = song.songVidTitle
+    thumbnails = song.songThumbnails
 
     #query in database using songID
-
-
-
 
     # get data
     # use pafy to convert webstie url to a audio stream url
     # TODO: Still bugging gdata=False
     #video = pafy.new(url, gdata=False)
-    video = pafy.new(url, basic=False)
+    video = pafy.new(songID, basic=False)
     # print(video.length)
     duration = video.length
     num_likes = video.likes
     num_views = video.viewcount
-    video_title = video.title
+    # video_title = video.title
     audio = video.getbestaudio()
     audio_url = audio.url
 
@@ -74,7 +85,7 @@ def formulate_response(songID):
                      "thumbnails": thumbnails,
                      "duration": duration,
                      "num_likes": num_likes,
-                     "video_title": video_title,
+                     "video_title": songTitle,
                      }
     print(response_dict)
     return response_dict

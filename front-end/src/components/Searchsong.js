@@ -6,11 +6,12 @@ import TextField from "@mui/material/TextField";
 import SendIcon from "@mui/icons-material/Send";
 const { REACT_APP_API_URL } = process.env;
 
-function SearchSong({ handlePlay }) {
+function SearchSong({ handlePlay, userInfo }) {
   const [title, setTitle] = useState();
   const [artist, setArtist] = useState();
   const [resSongID, setResSongID] = useState();
   const [loading, setLoading] = useState(false);
+  const [searchHistory, setSearchHistory] = useState({ his: [] });
 
   const handleSearch = (e) => {
     setLoading(true);
@@ -32,9 +33,10 @@ function SearchSong({ handlePlay }) {
 
   return (
     <div className="songWrapper">
-      <form onSubmit={handleSearch}>
+      <form onSubmit={handleSearch} className="searchForm">
         <h1>Search</h1>
         <TextField
+          sx={{ margin: "20px auto" }}
           fullWidth
           label="Song Name: "
           id="fullWidth"
@@ -47,6 +49,7 @@ function SearchSong({ handlePlay }) {
           required
         />
         <TextField
+          sx={{ margin: "20px auto" }}
           fullWidth
           label="Artist"
           id="fullWidth"
@@ -60,6 +63,7 @@ function SearchSong({ handlePlay }) {
         />
 
         <LoadingButton
+          sx={{ alignItems: "flex-end" }}
           type="submit"
           endIcon={<SendIcon />}
           loading={loading}
@@ -70,10 +74,16 @@ function SearchSong({ handlePlay }) {
         </LoadingButton>
       </form>
 
-      {/* TODO: Generate a list of result from Flask Query */}
-      <div>
-        {/* TODO: Switch link to use songID */}
-        <SongThumbnail youtubeID={resSongID} handlePlay={handlePlay} />
+      <div className="searchResult">
+        {resSongID ? (
+          <SongThumbnail
+            youtubeID={resSongID}
+            handlePlay={handlePlay}
+            userInfo={userInfo}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
