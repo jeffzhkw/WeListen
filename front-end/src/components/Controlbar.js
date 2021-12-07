@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from "react";
-import AudioPlayer from "./Audioplayer";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -55,31 +54,38 @@ function ControlBar({ currPlayingID }) {
         <></>
       )} */}
       {songDetail ? (
-        <ReactJkMusicPlayer
-          audioLists={[
-            {
-              name: songDetail.video_title,
-              cover: songDetail.thumbnails.default.url,
-              musicSrc: songDetail.audio_stream,
-              singer: songDetail.artist,
-              duration: songDetail.duration,
-            },
-          ]}
-          defaultPosition={{ bottom: "0" }}
-          mode="full"
-        />
+        <>
+          <ReactJkMusicPlayer
+            audioLists={[
+              {
+                name: songDetail.video_title,
+                cover: songDetail.thumbnails.default.url,
+                musicSrc: songDetail.audio_stream,
+                singer: songDetail.artist,
+                duration: songDetail.duration,
+              },
+            ]}
+            defaultPosition={{ bottom: "0" }}
+            mode="full"
+          />
+          <IconButton
+            component={Link}
+            to={"/activity/?urlSongID=" + songDetail.songID}
+            aria-label="share"
+          >
+            <ShareIcon />
+          </IconButton>
+          <IconButton
+            component={Link}
+            to={"/song/" + songDetail.songID}
+            aria-label="expand"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </>
       ) : (
-        <ReactJkMusicPlayer
-          audioLists={[
-            {
-              name: "Not Playing",
-            },
-          ]}
-          defaultPosition={{ bottom: "0" }}
-          mode="full"
-        />
+        <ReactJkMusicPlayer defaultPosition={{ bottom: "0" }} mode="full" />
       )}
-      ,
     </footer>
   );
 }
