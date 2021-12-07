@@ -29,34 +29,18 @@ body,
   justify-content: space-between;
 }
 
-.controlBarWrapper {
-  /* display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-self: flex-end;
-  width: 100%;
-  padding:30px 16px;
-  border-top: 1px solid #f0f0f0;
-  margin-bottom: 80px; */
-}
-
 .navBar {
   display: flex;
   flex-direction: row;
 }
 
-.navBar>* {
+.navBar > * {
   margin: auto 10px;
 }
 
 .userDetail {
   display: flex;
   flex-direction: row;
-}
-
-.containerWrapper {
-  min-width: 1280px;
-  margin: auto auto;
 }
 
 .songWrapper {
@@ -75,11 +59,15 @@ body,
   margin: 20px auto;
 }
 
+.containerWrapper {
+  min-width: 1280px;
+  margin: auto auto;
+}
+
 .groupsWrapper {
   display: flex;
   justify-content: space-around;
 }
-
 
 .bigclass {
   font-size: 30px;
@@ -105,7 +93,7 @@ body,
   padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center
+  justify-content: center;
 }
 
 .left16 {
@@ -128,10 +116,10 @@ body,
   overflow-y: auto;
 }
 
-.ant-form-item-label>label {
+.ant-form-item-label > label {
   font-size: 16px !important;
 }
-.divsize{
+.divsize {
   font-size: 18px;
   margin-bottom: 10px;
 }

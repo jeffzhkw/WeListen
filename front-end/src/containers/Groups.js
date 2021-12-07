@@ -10,7 +10,7 @@ function Groups({ userInfo }) {
       {/* <h1>Groups</h1>
       <div className="groupsWrapper">
       </div> */}
-        <LiveStream userInfo={userInfo}></LiveStream>
+      <LiveStream userInfo={userInfo}></LiveStream>
     </div>
   );
 }

@@ -36,7 +36,7 @@ function Activity({ userInfo, handlePlay }) {
         content: content,
       })
       .then((res) => {
-        console.log('returndata',res);
+        console.log("returndata", res);
       })
       .catch((err) => {
         console.warn(err);
@@ -64,9 +64,11 @@ function Activity({ userInfo, handlePlay }) {
   return (
     <div className="containerWrapper groupsClass">
       <div className="groupitem">
-        <h1 style={{marginBottom:'20px'}}>Activity</h1>
-        <div className='divsize'>Share a Song</div>
-        <div className='divsize' style={{marginBottom:'20px'}}>Post your thoughts for song {urlSongID}!!!</div>
+        <h1 style={{ marginBottom: "20px" }}>Activity</h1>
+        <div className="divsize">Share a Song</div>
+        <div className="divsize" style={{ marginBottom: "20px" }}>
+          Post your thoughts for song {urlSongID}!!!
+        </div>
         <Form name="control-ref" {...formItemLayout} size="middle">
           <Form.Item label="post:">
             <Search
@@ -95,7 +97,7 @@ function Activity({ userInfo, handlePlay }) {
           ></input>
           <button type="submit">Post</button>
         </form> */}
-        <div className='divsize'>See what your friends post</div>
+        <div className="divsize">See what your friends post</div>
         {postList.length !== 0 ? (
           postList.map((aPost, i) => {
             console.log(aPost);

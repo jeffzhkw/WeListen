@@ -139,7 +139,10 @@ function App() {
             }
           ></Route>
 
-          <Route path="/" element={<Start />}></Route>
+          <Route
+            path="/"
+            element={isLoggedIn ? <Navigate to="/home" /> : <Start />}
+          ></Route>
         </Routes>
         <ControlBar currPlayingID={currPlayingID} />
       </Router>
