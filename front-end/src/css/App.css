@@ -135,6 +135,17 @@ body,
   text-align: center;
 }
 
+.errorImg {
+  display: flex;
+  width: 100%;
+}
+
+.errorImg img {
+  font-size: 2em;
+  text-align: center;
+  justify-content: center;
+}
+
 #log {
   max-height: 200px;
   overflow-y: auto;

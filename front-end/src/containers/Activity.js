@@ -2,7 +2,7 @@ import axios from "@aws-amplify/storage/node_modules/axios";
 import { React, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import APost from "../components/APost";
-import { Form, Input, Button } from "antd";
+import { Form, Input } from "antd";
 const { Search } = Input;
 
 const { REACT_APP_API_URL } = process.env;
@@ -22,11 +22,27 @@ function Activity({ userInfo, handlePlay }) {
   const [content, setContent] = useState();
   const [songID, setSongID] = useState();
   const [postList, setPostList] = useState([]);
+  const [songDetail, setSongDetail] = useState();
   /* TODO: get Activity of username */
 
   useEffect(() => {
     setSongID(urlSongID);
   }, [urlSongID]);
+
+  useEffect(() => {
+    console.log(songID);
+    if (songID) {
+      axios
+        .get(`${REACT_APP_API_URL}/youtubeDetail?songID=${songID}`)
+        .then((response) => {
+          console.log(response.data);
+          setSongDetail(response.data);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+    }
+  }, [songID]);
 
   const handlePost = () => {
     axios
@@ -61,14 +77,21 @@ function Activity({ userInfo, handlePlay }) {
     labelCol: { span: 1 },
     wrapperCol: { span: 6 },
   };
+
   return (
     <div className="containerWrapper groupsClass">
       <div className="groupitem">
         <h1 style={{ marginBottom: "20px" }}>Activity</h1>
-        <div className="divsize">Share a Song</div>
-        <div className="divsize" style={{ marginBottom: "20px" }}>
-          Post your thoughts for song {urlSongID}!!!
-        </div>
+        {songDetail ? (
+          <div className="divsize" style={{ marginBottom: "20px" }}>
+            Post your thoughts for song {songDetail.video_title}!!!
+          </div>
+        ) : (
+          <div className="divsize" style={{ marginBottom: "20px" }}>
+            Post any thoughts !!!
+          </div>
+        )}
+
         <Form name="control-ref" {...formItemLayout} size="middle">
           <Form.Item label="post:">
             <Search

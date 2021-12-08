@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
-import CheckIcon from "@mui/icons-material/Check";
-import ToggleButton from "@mui/material/ToggleButton";
 import SongThumbnail from "../components/Songthumbnail";
 
 const { REACT_APP_API_URL } = process.env;
@@ -17,7 +15,7 @@ function Profile({ userInfo, handlePlay }) {
   const [following, setFollowing] = useState([]); //List of username that current user is follows
   const [follower, setFollower] = useState([]); //List of username whom follows current user.
   const isFollowing = follower.includes(loggedInUser);
-  const [selected, setSelected] = useState(false);
+  //const [selected, setSelected] = useState(false);
 
   const [favoriates, setFavoriates] = useState([]);
 

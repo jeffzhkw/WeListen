@@ -21,7 +21,6 @@ function SongThumbnail({ youtubeID, handlePlay, userInfo }) {
 
   useEffect(() => {
     setSongID(youtubeID);
-    console.log();
   }, [youtubeID]);
 
   useEffect(() => {
