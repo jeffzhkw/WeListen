@@ -7,6 +7,7 @@
 ../API_KEYS.py
 .ebignore
 .elasticbeanstalk/
+.DS_Store
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

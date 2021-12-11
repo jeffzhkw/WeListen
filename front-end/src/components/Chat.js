@@ -77,10 +77,10 @@ function Chat({ userInfo }) {
         locked = false;
       });
     } else {
-        document
-          .getElementById("log")
-          .appendChild(document.createElement("div"))
-          .append("Chat already disabled");
+      document
+        .getElementById("log")
+        .appendChild(document.createElement("div"))
+        .append("Chat already disabled");
     }
   }
   async function Join() {
@@ -97,10 +97,10 @@ function Chat({ userInfo }) {
         locked = false;
       });
     } else {
-        document
-          .getElementById("log")
-          .appendChild(document.createElement("div"))
-          .append("Chat not enabled");
+      document
+        .getElementById("log")
+        .appendChild(document.createElement("div"))
+        .append("Chat not enabled");
     }
   }
   async function Leave() {
@@ -115,10 +115,10 @@ function Chat({ userInfo }) {
         locked = false;
       });
     } else {
-        document
-          .getElementById("log")
-          .appendChild(document.createElement("div"))
-          .append("You haven't joined Public Chat");
+      document
+        .getElementById("log")
+        .appendChild(document.createElement("div"))
+        .append("You haven't joined Public Chat");
     }
   }
   async function SendPeerMessage() {
@@ -143,6 +143,13 @@ function Chat({ userInfo }) {
             .appendChild(document.createElement("div"))
             .append("Message sent to: " + peerId + " Message: " + peerMessage);
         }
+      })
+      .catch((error) => {
+        // console.warn(error);
+        document
+          .getElementById("log")
+          .appendChild(document.createElement("div"))
+          .append(error);
       });
   }
   async function SendChannelMessage() {
@@ -161,10 +168,10 @@ function Chat({ userInfo }) {
         locked = false;
       });
     } else {
-        document
-          .getElementById("log")
-          .appendChild(document.createElement("div"))
-          .append("You haven't joined Public Chat");
+      document
+        .getElementById("log")
+        .appendChild(document.createElement("div"))
+        .append("You haven't joined Public Chat");
     }
   }
   const formItemLayout = {

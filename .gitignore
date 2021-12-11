@@ -5,3 +5,4 @@
 back-end/API_KEYS.py
 back-end/.ebignore
 .elasticbeanstalk/
+.DS_Store
